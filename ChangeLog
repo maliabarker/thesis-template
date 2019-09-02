@@ -1,0 +1,171 @@
+
+
+May 2013 (Amit)
+---------------
+-Add option for pdftex with graphicx package as a comment in the preeamble
+
+
+March 2010 (Amit)
+---------------
+
+-Add new approval page and remove old approval page
+
+
+
+
+Changes by Mike Stark
+---------------------
+Dec, 2008
+
+-Rename bsuthesis.cls to bsu-ms.cls to keep older name
+-bsuthesis.cls is the new classfile for now.  We can change the name
+later, if necessary.
+
+For the most part, I just reorganized everything.  In particular I
+replaced most of the customized stuff in the ``monolithic'' copy of
+'report.cls' with macros that are defined in a ``CUSTOMIZED'' section
+at the end of the file.  Also, I restructured that copy so it is closer
+to the original (this facilitates a `diff` to see where they differ)
+I also pasted the 'size12.clo' code directly; the rationale is that
+we want our thesis style to change as little as possible with future
+releases of the LaTeX distribution.
+
+Summary of changes:
+
+  - I removed the extraneous package options, including the paper size, 
+    two-column mode.  The document font size is now fixed at 12 point.
+  
+  - I removed the "\masterstype" macro and added a "report" option to
+    the document class, and made whatever they type depends on work
+    accordingly.  
+
+  - There is a new \buildFrontPages command that constructs all the front
+    matter pages.  The original front matter commands, such as \abstract, 
+    \biosketch, etc., now just set macro values.  Consequently, they
+    can go in the preamble.
+
+  - I expanded the names of most of the front matter macros, to make them
+    more like Java style names:
+
+      \gmonth -> \graduationMonth
+      \gyear  -> \graduationYear
+      \cmteA  -> \committeeA          (etc.)
+
+  - Commands for setting names that may also have a title, like the 
+    committee members and advisor, accept an optional argument for the
+    title.  (This facilitates things like Ex-Officio members).
+
+  - There is some error checking: any required but undefined front matter
+    definitions are reported.
+
+  - All the stuff that was computer science specific has been removed
+    from the "bsu-ms.cls" file and replaced by macro-setting commands.
+
+  - I pasted the contents of "size12.clo" almost verbatim into this
+    file.
+
+  - I reverted much of the "monolithic paste" of "report.cls" to the
+    original form (to make a `diff` with the original more useful).  
+    Customization code has mostly been replaced by macros; there is a
+    "%!" comment near each variation from "report.cls"
+
+  - The title page now matches the requirements set forth in the 
+    standards pretty well; in particular, the author's name is near
+    the vertical center of the page.
+
+  - Multiline titles no longer cause any trouble (provided they aren't
+    more than 5 or 6 lines)
+
+  - There is a \titleBreak command that can be used to break lines
+    in the title on the title page only (it gets turned off before
+    the approval page is produced.)
+
+  - The document margins are now a little closer to the requirements,
+    of 1 inch on the top, right, and bottom, and 1 1/2 inches at the
+    left.
+
+  - I've made the chapter and front matter page headings consistent.  
+    They are all in 17 point bold font, in all capital letters, and
+    all start 2 inches (to the point!) from the top of the page.
+    (Really that requirement should be specified in terms of the heading
+    text baseline, don't you think?)
+
+  - The approval page now matches the example given in the standards
+    document, with the reader's name at the left of the line (which is
+    3.75 inches long) and the reader's position (e.g. Advisor) directly
+    below it.  The example has a 3/4 inch space for each signature,
+    which seems reasonable so I matched it.
+
+  - For some reason, the author's name on the approval page was set
+    in italics.  I changed that.
+
+  - I added dotted line leaders to the chapter names, which includes
+    things like the abstract.  Neither "report.cls" nor "book.cls" does
+    that (I don't know why--it really looks better).  I also tightened
+    the space between the dots from 4.5 to 2.5 (stored in \@TOCdotsep)
+
+  - The table of contents formats the leaders to end at a fixed vertical
+    position, which assumes there are three-digit page numbers.  That
+    produces too much space if there are, say, only 98 pages.  Ideally
+    we could use the .aux file to count the number of pages but that's
+    pretty hard (unless you are willing to make a third pass).  So I
+    added a \maxPage macro that uses the value to set the space for the
+    page number.
+  
+  - The bibliography name is now properly contained in \bibname, which
+    allows students to use "Bibliography" instead of "References" (this
+    is necessary if they want to include entries not referenced anywhere
+    in the text).
+
+  - I added a couple of possibly useful commands and environments.  I
+    didn't include my 'code' environment, which is complicated and not
+    terribly robust, but I did add a 'vcode' environment that starts
+    single spacing and also reduces the font a bit so that it blends
+    better with the running text.  (The monospace "typewriter" font
+    runs a bit wide and tends to look bigger than the normal Roman font.)
+ 
+  - Finally, I added an "Amit" option, that uses "Chapter" instead
+    of "CHAPTER" for chapter headings in the main text, and a "Mike"
+    option that uses PostScript fonts (except Courier, which runs too
+    wide for my taste).  That was more for fun; I don't think we need
+    to publicize those!
+
+
+Incidental changes:
+
+  - The names of the front matter pages are all in macros.  I'm still
+    not sure what the title of the approval page for a project should be:
+
+      "Approval to submit project report"
+      "Approval to submit report"
+      "Approval to submit project"
+
+  - The chapter names are capitalized in the table of contents, so that
+    they match the format in the headings (although the font size is
+    a notch smaller).
+
+  - The title page is now page 1, as is the blank page in front of it.
+    (I considered taking out the blank first and last pages, but I think
+    it's better to have them in.  Good idea, whoever put them there!)
+
+  - I opened up the space inserted into the list of tables (figures) 
+    between chapters from 10 points to 12 points.  (I was surprised that
+    the value did not depend on the font size.)
+
+  - I'm sure there are many more; these are all I can remember.
+
+I spent a fair amount of time (way too much, actually) working on the
+problem of calling a single appendix just "Appendix" rather than 
+"Appendix A".  The tricky part is doing it without requiring a third
+LaTeX pass.  I found two solutions, both requiring some extra .aux
+file output.  But then I realized that it's probably not a good idea, 
+because labels for figures and equations in the appendix have to have 
+some prefix for their label, and "A" is as good as any, right?  Hmm, I
+just realized that we can still use "A" as prefix, but not name the
+appendix "Appendix A".  I'll come back to that...
+
+
+
+
+
+
