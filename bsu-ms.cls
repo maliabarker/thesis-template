@@ -213,7 +213,7 @@
    \renewcommand\newblock{\par}}%
 }
 
-%% The "project" option cuases the document to be formatted as a project
+%% The "project" option causes the document to be formatted as a project
 %% report rather than a thesis.  At the moment there isn't much difference,
 %% but in future versions there might be.
 
@@ -221,6 +221,11 @@
 \@projectfalse
 \DeclareOption{project}{%
   \@projecttrue%
+}
+\newif\if@proposal
+\@proposalfalse
+\DeclareOption{proposal}{%
+  \@proposaltrue%
 }
 
 %% The "flushtop" option basically eliminates any vertical rubber space,
@@ -1176,7 +1181,10 @@
 %% "project" class option is given
 \gdef\@masterstype{\if@project{project}\else{thesis}\fi}
 \gdef\@Masterstype{\if@project{Project}\else{Thesis}\fi}
+\gdef\@masterstype{\if@proposal{proposal}\else{thesis}\fi}
+\gdef\@Masterstype{\if@proposal{Proposal}\else{Thesis}\fi}
 \gdef\@docname{\if@project{PROJECT REPORT}\else{THESIS}\fi}
+\gdef\@docname{\if@proposal{PROPOSAL}\else{THESIS}\fi}
 
 %% The names of the front matter pages are pretty much fixed,
 %% but just in case, let's put them in macros
