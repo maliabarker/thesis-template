@@ -1587,12 +1587,12 @@
   %% Create the autobiographical sketch, if there is one
   \if@biosketch \@makebiosketch\fi
   %% Create the abstract page
-  \@makeabstract
+  \if@proposal{}\else{\@makeabstract}\fi
 
   %% Put in the table of contents, the list of tables, and list of figures
   \tableofcontents
-  \listoftables
-  \listoffigures
+  \if@proposal{}\else{\listoftables}\fi
+  \if@proposal{}\else{\listoffigures}\fi
 
   %% render accidental repeated calls harmless
   %\let\frontPages\relax
