@@ -1091,6 +1091,7 @@
 
 %% For chapter names in the heading, and table of contents
 \def\@chapterHeadCase{\expandafter\uppercase}
+%\def\@chapterNameCase{\expandafter\uppercase}
 \def\@chapterNameCase{\expandafter\uppercase}
 
 %% For the dot spacing in the table of contents leaders
@@ -1182,7 +1183,6 @@
 %% \@masterstype is either "thesis" (default) or "project" if the
 %% "project" class option is given
 \gdef\@masterstype{\if@project{project}\else{thesis}\fi}
-\gdef\@Masterstype{\if@project{Project}\else{Thesis}\fi}
 \gdef\@Masterstype{\if@project{Project}\else{Thesis}\fi}
 \gdef\@proposaltype{\if@proposal{proposal}\else{}\fi}
 \gdef\@Proposaltype{\if@proposal{Proposal}\else{}\fi}
@@ -1423,19 +1423,19 @@
   \noindent Proposal type: \underline{\@Masterstype}\\[12pt]
   \noindent Name: \underline{\@author}\\[12pt]
   \noindent Date: \underline{\@defenseDate}\\[12pt]
-  \noindent {\@Masterstype} Proposal Title: \underline{\@title}\\[12pt]
+  \noindent Proposal Title: \underline{\@title}\\[12pt]
 
   \noindent The above proposal has been accepted by the committee below.
 
   \label{CommitteeApproval}
   \begin{flushleft}
-    \begin{minipage}{5.50in}
-  		{\@advisor} \hfill \makebox[2.5in][l]{\@advisorTitle}\\[12pt]
-  		{\@committeeA} \hfill \makebox[2.5in][l]{\@titleA}\\[12pt]
-  		{\@committeeB} \hfill \makebox[2.5in][l]{\@titleB}\\[12pt]
-  		\if@committeeC{\@committeeC} \hfill \makebox[2.5in][l]{\@titleC}\\[12pt]\fi
-  		\if@committeeD{\@committeeD} \hfill \makebox[2.5in][l]{\@titleD}\\[12pt]\fi
-  		{\@gradCoordinator} \hfill \makebox[2.5in][l]{\@titleGC}\\[12pt]
+    \begin{minipage}{6.50in}
+  		{\@advisorTitle}:\underline{\hspace{1.5in}} \hfill \makebox[2.5in][l]{\@advisor}\\[12pt]
+  		{\@titleA}:\underline{\hspace{1.5in}} \hfill \makebox[2.5in][l]{\@committeeA}\\[12pt]
+  		{\@titleB}:\underline{\hspace{1.5in}} \hfill \makebox[2.5in][l]{\@committeeB}\\[12pt]
+  		\if@committeeC{\@titleC}:\underline{\hspace{1.5in}} \hfill \makebox[2.5in][l]{\@committeeC}\\[12pt]\fi
+  		\if@committeeD{\@titleD}:\underline{\hspace{1.5in}} \hfill \makebox[2.5in][l]{\@committeeD}\\[12pt]\fi
+  		{\@titleGC}:\underline{\hspace{1.5in}} \hfill \makebox[2.5in][l]{\@gradCoordinator}\\[12pt]
 		
 	\end{minipage}
   \end{flushleft}
