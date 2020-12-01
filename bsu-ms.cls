@@ -150,6 +150,7 @@
 %% that can be used to locally change the spacing in the document.
 \def\@ptsize{2}  %% (required by the 'setspace' package)
 \RequirePackage{setspace}[6.7]
+\RequirePackage{ifthen}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1572,14 +1573,14 @@
   \ifundefined{@major}\@missing{\noexpand\major}\fi
   \ifundefined{@department}\@missing{\noexpand\department}\fi
   \ifundefined{@college}\@missing{\noexpand\college}\fi
-  \ifundefined{@abstract}\@missing{\noexpand\abstract}\fi
+  \ifundefined{@proposal}{\ifundefined{@abstract}\@missing{\noexpand\abstract}\fi}\fi
 
   %% Create the title page
   \@maketitle
   %% Create the copyright page, if there is one
   \if@copyright \@makecopyright\fi
   %% Create the defense committee approval page
-  \@makecmteapproval
+  \if@proposal{}\else{\@makecmteapproval}\fi
   %% Create the dedication page, if there is one
   \if@dedication \@makededication\fi
   %% Create the ackowledgments page, if there is one
