@@ -1,9 +1,10 @@
 % The \documentclass command is the first command in a LaTeX file.
-\documentclass[proposal]{bsu-ms}
+\documentclass[project,proposal]{bsu-ms}
 %\documentclass[project]{bsu-ms}  % for project reports
+%\documentclass[thesis]{bsu-ms}  % for thesis
+%\documentclass[thesis,proposal]{bsu-ms}  % for thesis proposal
 
-% "bsu-ms" is our "in-house" class file for Boise State theses and project
-% reports.
+% "bsu-ms" is our "in-house" class file for Boise State theses and project reports.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -149,9 +150,11 @@
 
 % Current department chair (at the moment, this is not used)
 \departmentChair{Amit Jain}
+\gradCoordinator{Jerry Fails, Ph.D.}
 
-% Document abstract - not needed for a proposal
-%\abstract{} 
+
+% Document abstract - not needed for a proposal but still has to be defined
+\abstract{} 
 % An \emph{abstract} is a brief summary of the document.  A typical
 %  abstract provides a brief introduction, enough to provide context for the
 %  document, explains the purpose of the thesis or project, and summarizes the
@@ -282,6 +285,14 @@
 %          in label tags (although ':' is okay).
 
 \label{ch:intro}
+
+\chapter{\Masterstype\  Statement}
+
+
+\chapter{Background}
+
+\chapter{Methods}
+
 
 % \section adds a first-level subheading
 \section{Get ready for Foo}\label{sec:getReady}
@@ -658,11 +669,11 @@ N &M & &1 &10 &20 &30 &40 &50 &60\\ \hline
 \chapter{Conclusions}
 
 
-\section{What have we done so far?}
 
-\section{Future directions}
-The coming revolution in foo-lets offers many opportunities for further
-research.
+\chapter{\Masterstype\ Schedule}
+
+
+\chapter{Artifacts}
 
 % The main text of the work ends here; the remaining text is back matter.
 \backmatter
@@ -714,28 +725,9 @@ Projects.} Fourth edition, August 2001.
 \end{thebibliography}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-% Appendix
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Use the \appendix command (only once) to start the appendix (or appendices)
 
-\appendix
 
-% After \appendix has executed, the \chapter command creates an appendix.
-% Appendices are numbered by "A", "B", etc.
-
-\chapter{Timing Measurements}\label{app:Timing}
-
-Here is Appendix A. See Appendix~\ref{app:Setup} for the experimental setup.
-
-% Test a figure in it to see if it works right
-
-\chapter{Experimental Setup}\label{app:Setup}
-
-Here is Appendix~\ref{app:Setup}.
 
 
 % The \finish command is executed just before the \end{document}. 

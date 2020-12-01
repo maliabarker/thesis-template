@@ -134,10 +134,10 @@
 %%    
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\typeout{Boise State University thesis class  16th December, 2014}
+\typeout{Boise State University thesis class  2nd December, 2020}
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{bsu-ms}[2014/12/16 LaTeX class for Boise State University]
+\ProvidesClass{bsu-ms}[2020/12/02 LaTeX class for Boise State University]
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -150,7 +150,6 @@
 %% that can be used to locally change the spacing in the document.
 \def\@ptsize{2}  %% (required by the 'setspace' package)
 \RequirePackage{setspace}[6.7]
-\RequirePackage{ifthen}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1158,6 +1157,8 @@
   \gdef\@committeeC{#2}\gdef\@titleC{#1}\@committeeCtrue}
 \newcommand{\committeeD}[2][Member, Supervisory Committee]{%
   \gdef\@committeeD{#2}\gdef\@titleD{#1}\@committeeDtrue}
+\newcommand{\gradCoordinator}[2][Graduate Coordinator]{%
+  \gdef\@gradCoordinator{#2}\gdef\@titleGC{#1}}
 
 %% I suppose some of these could be made optional, with reasonable
 %% defaults, but somehow it seems better to require them to be specified
@@ -1182,10 +1183,16 @@
 %% "project" class option is given
 \gdef\@masterstype{\if@project{project}\else{thesis}\fi}
 \gdef\@Masterstype{\if@project{Project}\else{Thesis}\fi}
-\gdef\@masterstype{\if@proposal{proposal}\else{thesis}\fi}
-\gdef\@Masterstype{\if@proposal{Proposal}\else{Thesis}\fi}
+\gdef\@Masterstype{\if@project{Project}\else{Thesis}\fi}
+\gdef\@proposaltype{\if@proposal{proposal}\else{}\fi}
+\gdef\@Proposaltype{\if@proposal{Proposal}\else{}\fi}
 \gdef\@docname{\if@project{PROJECT REPORT}\else{THESIS}\fi}
-\gdef\@docname{\if@proposal{PROPOSAL}\else{THESIS}\fi}
+\gdef\@docname{\if@proposal{\if@project{PROJECT REPORT}\else{THESIS}\fi}\fi}
+
+\newcommand{\masterstype}{\@masterstype}
+\newcommand{\Masterstype}{\@Masterstype}
+\newcommand{\proposaltype}{\@proposaltype}
+\newcommand{\Proposaltype}{\@Proposaltype}
 
 %% The names of the front matter pages are pretty much fixed,
 %% but just in case, let's put them in macros
@@ -1193,6 +1200,7 @@
 %% are already defined.)
 
 \newcommand{\committeeapproval}{DEFENSE COMMITTEE AND FINAL READING APPROVALS}
+\newcommand{\proposalacceptance}{PROPOSAL ACCEPTANCE}
 \newcommand{\acknowledgmentsname}{ACKNOWLEDGMENTS}
 \newcommand{\biosketchname}{AUTOBIOGRAPHICAL SKETCH}
 \newcommand{\listabbrevname}{LIST OF ABBREVIATIONS}
@@ -1295,7 +1303,7 @@
       \@author\mbox{}\\
       \mbox{}\vfill
       %% the bit at the bottom
-      A \@masterstype\\
+      A \@masterstype\ \proposaltype\\
       submitted in partial fulfillment\\
       of the requirements for the degree of\\
       {\@degree} in {\@major} \\
@@ -1350,7 +1358,7 @@
   \begin{center}
   {BOISE STATE UNIVERSITY GRADUATE COLLEGE}\\[12pt]
 
-  {\bf \committeeapproval}
+  {\bf \proposalacceptance}
   \end{center}
 
   %% reset the page counter
@@ -1390,6 +1398,51 @@
 
   \normalspacing
 }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Proposal Acceptance page
+
+
+\def\@makepropapproval{
+  \newpage
+
+  \begin{center}
+  {BOISE STATE UNIVERSITY}\\
+  {Department of Computer Science }\\[12pt]
+
+  {\bf \proposalacceptance}
+  \end{center}
+
+  %% reset the page counter
+  \if@copyright\setcounter{page}{3}\else\setcounter{page}{2}\fi
+  %% (although this page is not numbered)
+  \thispagestyle{empty}
+  \singlespacing
+
+  \noindent Proposal type: \underline{\@Masterstype}\\[12pt]
+  \noindent Name: \underline{\@author}\\[12pt]
+  \noindent Date: \underline{\@defenseDate}\\[12pt]
+  \noindent {\@Masterstype} Proposal Title: \underline{\@title}\\[12pt]
+
+  \noindent The above proposal has been accepted by the committee below.
+
+  \label{CommitteeApproval}
+  \begin{flushleft}
+    \begin{minipage}{5.50in}
+  		{\@advisor} \hfill \makebox[2.5in][l]{\@advisorTitle}\\[12pt]
+  		{\@committeeA} \hfill \makebox[2.5in][l]{\@titleA}\\[12pt]
+  		{\@committeeB} \hfill \makebox[2.5in][l]{\@titleB}\\[12pt]
+  		\if@committeeC{\@committeeC} \hfill \makebox[2.5in][l]{\@titleC}\\[12pt]\fi
+  		\if@committeeD{\@committeeD} \hfill \makebox[2.5in][l]{\@titleD}\\[12pt]\fi
+  		{\@gradCoordinator} \hfill \makebox[2.5in][l]{\@titleGC}\\[12pt]
+		
+	\end{minipage}
+  \end{flushleft}
+
+  \normalspacing
+}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -1573,14 +1626,14 @@
   \ifundefined{@major}\@missing{\noexpand\major}\fi
   \ifundefined{@department}\@missing{\noexpand\department}\fi
   \ifundefined{@college}\@missing{\noexpand\college}\fi
-  \ifundefined{@proposal}{\ifundefined{@abstract}\@missing{\noexpand\abstract}\fi}\fi
+  \ifundefined{@abstract}\@missing{\noexpand\abstract}\fi
 
   %% Create the title page
   \@maketitle
   %% Create the copyright page, if there is one
   \if@copyright \@makecopyright\fi
-  %% Create the defense committee approval page
-  \if@proposal{}\else{\@makecmteapproval}\fi
+  %% Create the defense committee or proposal approval page
+  \if@proposal{\@makepropapproval}\else{\@makecmteapproval}\fi
   %% Create the dedication page, if there is one
   \if@dedication \@makededication\fi
   %% Create the ackowledgments page, if there is one
