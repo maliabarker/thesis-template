@@ -123,13 +123,13 @@
 %
 % causes "Chair" to appear on the approval page (the one with the signatures) 
 % in place of "Advisor"
-\advisor{Foo The Great, Ph.D.} % also the chair of your committee
+\advisor{Foo The Great} % also the chair of your committee
 
 % Committee members: \committeeA is listed first after the advisor,
 % \committeeB second, etc.  An optional argument is accepted to replace
 % the default "Committee Member" position.
-\committeeA{Aaa, Ph.D.} 
-\committeeB{Bbb, Ph.D.}
+\committeeA{Aaa} 
+\committeeB{Bbb}
 
 % Master's committees normally have three members, but in case there is
 % a need for more, use these commands
@@ -150,7 +150,7 @@
 
 % Current department chair (at the moment, this is not used)
 \departmentChair{Amit Jain}
-\gradCoordinator{Jerry Fails, Ph.D.}
+\gradCoordinator{Jerry Fails}
 
 
 % Document abstract - not needed for a proposal but still has to be defined
@@ -286,12 +286,20 @@
 
 \label{ch:intro}
 
+This introduces the work to be done so it can be reasonably well understood by a faculty member
+not working in the research area.
+
 \chapter{\Masterstype\  Statement}
+
+A concise statement of the thesis/project, e.g., the hypothesis to be tested, the thesis to be
+defended, the project to be completed, the question to be answered, etc.
 
 
 \chapter{Background}
 
 \chapter{Methods}
+The method to be followed in accomplishing the thesis/project statement, i.e., proposed algorithms,
+procedures, controls, sample sizes, experiments, and expected results, etc.
 
 
 % \section adds a first-level subheading
@@ -669,8 +677,12 @@ N &M & &1 &10 &20 &30 &40 &50 &60\\ \hline
 
 \chapter{\Masterstype\ Schedule}
 
+A schedule for completion of the thesis.
 
 \chapter{Artifacts}
+
+A description of any artifacts beside the write-up for the
+project or thesis, i.e., code, user's guide, etc. 
 
 % The main text of the work ends here; the remaining text is back matter.
 \backmatter
