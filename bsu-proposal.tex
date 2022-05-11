@@ -1,8 +1,8 @@
 % The \documentclass command is the first command in a LaTeX file.
-\documentclass[project,proposal]{bsu-ms}
+\documentclass[thesis,proposal]{bsu-ms}
 %\documentclass[project]{bsu-ms}  % for project reports
 %\documentclass[thesis]{bsu-ms}  % for thesis
-%\documentclass[thesis,proposal]{bsu-ms}  % for thesis proposal
+%\documentclass[project,proposal]{bsu-ms}  % for project proposal
 
 % "bsu-ms" is our "in-house" class file for Boise State theses and project reports.
 
@@ -59,6 +59,7 @@
 %\usepackage[colorlinks=true]{hyperref}
 
 % Others to consider
+\usepackage{listings}
 
 % The 'subfigure' package does a nice job handling and labelling subfigures
 %\usepackage{subfig}
@@ -74,12 +75,11 @@
 % Generate intra-document links and also allows url and href commands for
 % to generate embedded links in the document.
 % This breaks the build right now :-(
-%\usepackage{hyperref}
-%\hypersetup{
-%	colorlinks=true
-%}
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true
+}
 
-\usepackage{listings}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
