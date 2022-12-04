@@ -1,11 +1,18 @@
+
+Dec 2022 (Amit)
+--------------
+
+-Rename class file to bsu-cs.cls to reflect it is more than just for masters.
+-Added dissertation option.
+
 Dec 2020 (Amit)
 ---------------
 
--Add proposal option for both thesis and project reports.
+-Add proposal option for both thesis and project reports. Requires more work....
 
 May 2013 (Amit)
 ---------------
--Add option for pdftex with graphicx package as a comment in the preeamble
+-Add option for pdftex with graphicx package as a comment in the preeamble.
 
 
 March 2010 (Amit)

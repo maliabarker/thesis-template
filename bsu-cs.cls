@@ -1,9 +1,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
-%% `bsu-ms.cls'
+%% `bsu-cs.cls'
 %%
 %% LaTeX2e document class for Boise State University master's thesis and 
-%% project reports.
+%% project reports and doctoral dissertation.
 %%
 %% This file is based on the standard LaTeX 'report' document class
 %% (which can be found in /usr/share/texmf/tex/latex/base/report.cls)
@@ -13,9 +13,9 @@
 %% to that style.
 %%
 %% The purpose of this class file is to make it easier for students to 
-%% format thesis and project reports to conform (as closely as is reasonably 
-%% possible) to the formatting requirements set forth in the document 
-%% "Standards for the preparation of dissertations, theses, and projects" 
+%% format thesis, dissertation and project reports to conform (as closely 
+%% as is reasonably possible) to the formatting requirements set forth in the 
+%% document "Standards for the preparation of dissertations, theses, and projects" 
 %% compiled by the Graduate College.  The primary variations are
 %%
 %%   - Vertical and horizontal spacing is handled by the TeX software; there 
@@ -80,7 +80,7 @@
 %% equally useful for students in any department.
 %%
 %% NOTE: students should not need to make any changes to this file.
-%% See "bsu-thesis-project-template.tex" for an example of how to use
+%% See "bsu-thesis-dissertation-template.tex" for an example of how to use
 %% this document class in LaTeX.
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -104,8 +104,8 @@
 %%     originals.  Whenever possible (and reasonable), customizations are
 %%     done using macros defined in a separate section.
 %%
-%% Incidentally, first-person references in this document refer to Mike Stark.
-%% (With regards to the uuthesis.sty, I alone updated it to work with LaTeX2e.)
+%% Incidentally, first-person references in this document refer to Mike Stark (or Amit Jain).
+%% (With regards to the uuthesis.sty, Mike alone updated it to work with LaTeX2e.)
 %%
 %%
 %% What's left to do:
@@ -121,23 +121,23 @@
 %%     implement it.  I put this in because the wide spacing in short pages 
 %%     bothers some people.
 %%
-%%   * I know there are standards for documenting LaTeX class files.  This
+%%   * I know there are standards for documenting LaTeX class files. This
 %%     file should conform.
 %%
 %%   * As it stands, sectioning in the list List of Abbreviations and the
 %%     List of Figures doesn't work well: it just inserts a centered section-
 %%     style line with some glue.
 %%  
-%%   * The standards allow for a "List of Photos/Plates" and a "List of 
-%%     Maps" in the front matter.  It seems unlikely that CS students would
-%%     need them, but it might be worthwhile including them.
+%%   * The standards allow for a "List of Pictures/Maps" in the front matter. It 
+%%     seems unlikely that CS students would need them, but it might be worthwhile 
+%%     including them.
 %%    
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\typeout{Boise State University thesis class  2nd December, 2020}
+\typeout{Boise State University thesis/dissertation class 2nd December, 2022}
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{bsu-ms}[2020/12/02 LaTeX class for Boise State University]
+\ProvidesClass{bsu-cs}[2022/12/02 LaTeX class for Boise State University]
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -157,10 +157,10 @@
 %% Class Options
 
 %% To keep things simple, most of the options that don't apply to the 
-%% standards document for a project/thesis at Boise State.  Keeping them 
-%% in might lead to confusion, and any student who wants to use more 
-%% extensive options (say, for a "personal" version) of his/her thesis
-%% can always switch to a different class file.  
+%% standards document for a project/thesis at Boise State are removed. 
+%% Keeping them in might lead to confusion, and any student who wants 
+%% to use more extensive options (say, for a "personal" version) of 
+%% his/her thesis can always switch to a different class file.  
 %%
 %% There is no paper size option.  The requirement is U.S. letter 
 %% (8.5-by-11 inch paper), and this is unlikely to change due to binding 
@@ -213,10 +213,17 @@
    \renewcommand\newblock{\par}}%
 }
 
+%% The "dissertation" option causes the document to be formatted as a dissertation
+%% rather than a thesis.  
 %% The "project" option causes the document to be formatted as a project
-%% report rather than a thesis.  At the moment there isn't much difference,
-%% but in future versions there might be.
+%% report rather than a thesis.  
+%% At the moment there isn't much difference, but in future versions there might be.
 
+\newif\if@dissertation
+\@dissertationfalse
+\DeclareOption{dissertation}{%
+  \@dissertationtrue%
+}
 \newif\if@project
 \@projectfalse
 \DeclareOption{project}{%
@@ -1124,7 +1131,7 @@
 %% The content of the front matter pages are controlled through macros,
 %% which are (presumably) set in the document.    
 
-%% \title is the title of the thesis or project
+%% \title is the title of the dissertation or thesis or project
 \renewcommand{\title}[1]{\gdef\@title{#1}\gdef\@upcasetitle{\uppercase{#1}}}
 
 %% Sometimes line breaking of the title on the title page needs manual
@@ -1180,14 +1187,20 @@
 %% \college is the name of the college, e.g., "Engineering"
 \newcommand{\college}[1]{\gdef\@college{#1}}
 
-%% \@masterstype is either "thesis" (default) or "project" if the
-%% "project" class option is given
+%% \@masterstype is either "thesis" (default) or "dissertation" or "project" if the
+%% appropriate class option is given
 \gdef\@masterstype{\if@project{project}\else{thesis}\fi}
 \gdef\@Masterstype{\if@project{Project}\else{Thesis}\fi}
+
+\gdef\@masterstype{\if@dissertation{dissertation}\else{thesis}\fi}
+\gdef\@Masterstype{\if@dissertation{Dissertation}\else{Thesis}\fi}
+
 \gdef\@proposaltype{\if@proposal{proposal}\else{}\fi}
 \gdef\@Proposaltype{\if@proposal{Proposal}\else{}\fi}
+
 \gdef\@docname{\if@project{PROJECT REPORT}\else{THESIS}\fi}
-\gdef\@docname{\if@proposal{\if@project{PROJECT REPORT}\else{THESIS}\fi}\fi}
+\gdef\@docname{\if@proposal{\if@project{PROPOSAL}\else{THESIS}\fi}\fi}
+\gdef\@docname{\if@dissertation{DISSERTATION}\else{THESIS}\fi}
 
 \newcommand{\masterstype}{\@masterstype}
 \newcommand{\Masterstype}{\@Masterstype}
@@ -1202,6 +1215,7 @@
 \newcommand{\committeeapproval}{DEFENSE COMMITTEE AND FINAL READING APPROVALS}
 \newcommand{\proposalacceptance}{PROPOSAL ACCEPTANCE}
 \newcommand{\acknowledgmentsname}{ACKNOWLEDGMENTS}
+\newcommand{\dedicationame}{DEDICATION}
 \newcommand{\biosketchname}{AUTOBIOGRAPHICAL SKETCH}
 \newcommand{\listabbrevname}{LIST OF ABBREVIATIONS}
 \newcommand{\listsymbolname}{LIST OF SYMBOLS}
@@ -1358,7 +1372,7 @@
   \begin{center}
   {BOISE STATE UNIVERSITY GRADUATE COLLEGE}\\[12pt]
 
-  {\bf \proposalacceptance}
+  \textbf{\committeeapproval}
   \end{center}
 
   %% reset the page counter
@@ -1527,7 +1541,9 @@
 
 \def\@makededication{%
   \newpage
-  \mbox{}\vfill\centerline{\@dedication}\vfill
+  \chapter*{\dedicationame}
+  \hspace*{\parindent}\@dedication
+%  \mbox{}\vfill\centerline{\@dedication}\vfill
 }
 
 
@@ -1558,7 +1574,7 @@
 \centerline{\textbf{\@sectionNameStyle #1}}\vspace*{2em \@plus.2ex}}
 
 \newenvironment{listAbbreviations}{\newpage
-  \if@symbollist\ClassError{bsu-ms}{list of abbreviations must preceed%
+  \if@symbollist\ClassError{bsu-cs}{list of abbreviations must preceed%
     list of symbols}{}\fi%
   \chapter*{\listabbrevname} %
   \addcontentsline{toc}{chapter}{\listabbrevname}%
@@ -1583,7 +1599,7 @@
 \newif\if@symbollist\@symbollistfalse
 
 \newenvironment{listSymbols}{\newpage
-  \if@abbrevlist\ClassError{bsu-ms}{list of symbols must follow%
+  \if@abbrevlist\ClassError{bsu-cs}{list of symbols must follow%
     list of abbreviations}{}\fi%
   \chapter*{\listsymbolname} %
   \addcontentsline{toc}{chapter}{\listsymbolname}%
@@ -1604,7 +1620,7 @@
 
 %% Error message stuff: \missing{name} calls \ClassError (standard LaTeX2e)
 %% informing the user that the name has not been defined.
-\def\@missing#1{\ClassError{bsu-ms}{missing #1^^J^^J%
+\def\@missing#1{\ClassError{bsu-cs}{missing #1^^J^^J%
   \@spaces(did you forget the #1command?)}%
   {The \noexpand\buildFrontPages command, which generates all the front matter
    pages,^^Jneeds a #1command prior to its execution.}}
