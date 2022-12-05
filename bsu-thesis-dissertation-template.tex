@@ -53,9 +53,6 @@
 \usepackage[pdftex]{graphicx}
 % Then the figures should be in pdf, jpg or png format.
 
-% The hyperref package provides support for hyperlinks inside/outside the document
-%\usepackage{url}
-
 % Others to consider
 \usepackage{listings}
 \usepackage{color}
@@ -138,10 +135,10 @@
 
 % Generate intra-document links and also allows url and href commands for
 % to generate embedded links in the document.
-% This breaks the build right now :-(
 \usepackage{hyperref}
 \hypersetup{
-	colorlinks=true
+	colorlinks=true,
+	allcolors=blue,
 }
 
 
@@ -396,7 +393,7 @@ That way, \LaTeX\ will find it, because it looks in current directory by default
 \item Upload the \texttt{bsu-cs.cls} file along with this template (and associated files)
 to Overleaf to use web-based LaTeX.
 
-\item The current style file may be installed in some directory available system wide.  (Ask your
+\item The current style class file may be installed in some directory available system wide.  (Ask your
 systems administrator if this is the case).  You will have to include that directory in the path
 \LaTeX\ uses to search for input files.  Under Linux, this is controlled by the \texttt{TEXINPUTS}
 environment variable, which can be set in the \texttt{.bashrc} file in your home directory.
@@ -413,7 +410,7 @@ For example
 adds \texttt{/usr/local/texinputs}, a possible location for \texttt{bsu-cs.cls}, although it
 will not take effect until you \texttt{source} the \texttt{.bashrc} file, or log in again.
 
-\item Install the style files in a directory under your accounts and set the \texttt{TEXINPUTS}
+\item Install the style class files in a directory under your accounts and set the \texttt{TEXINPUTS}
 variable accordingly.
 
 \end{enumerate}
@@ -782,7 +779,7 @@ research.
 \label{references}
 \bibitem{ws:book1} Wabi-sabi The Great. \emph{The World According to Wabi-sabi.} NoWabi-sabi
 Press, Wabi-sabiland, 1922.
-\bibitem{foo:book2} Wabi-sabi The Great. \emph{The World Without Wabi-sabi.} NoWabi-sabi
+\bibitem{ws:book2} Wabi-sabi The Great. \emph{The World Without Wabi-sabi.} NoWabi-sabi
 Press, Wabi-sabiland, 1952.
 \bibitem{me:paper1} Wabi-sabi Admirer. ``An Analysis of Wabi-sabiism.'' \emph{Journal of the
 Advanced Computing Wabi-sabi}, vol. 21(2), pp. 272--287.

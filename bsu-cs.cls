@@ -1189,11 +1189,8 @@
 
 %% \@masterstype is either "thesis" (default) or "dissertation" or "project" if the
 %% appropriate class option is given
-\gdef\@masterstype{\if@project{project}\else{thesis}\fi}
-\gdef\@Masterstype{\if@project{Project}\else{Thesis}\fi}
-
-\gdef\@masterstype{\if@dissertation{dissertation}\else{thesis}\fi}
-\gdef\@Masterstype{\if@dissertation{Dissertation}\else{Thesis}\fi}
+\gdef\@masterstype{\if@project{project}\else\if@dissertation{dissertation}\else{thesis}\fi\fi}
+\gdef\@Masterstype{\if@project{Project}\else\if@dissertation{Dissertation}\else{Thesis}\fi\fi}
 
 \gdef\@proposaltype{\if@proposal{proposal}\else{}\fi}
 \gdef\@Proposaltype{\if@proposal{Proposal}\else{}\fi}
