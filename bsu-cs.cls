@@ -2,32 +2,32 @@
 %%
 %% `bsu-cs.cls'
 %%
-%% LaTeX2e document class for Boise State University master's thesis and 
+%% LaTeX2e document class for Boise State University master's thesis and
 %% project reports and doctoral dissertation.
 %%
 %% This file is based on the standard LaTeX 'report' document class
 %% (which can be found in /usr/share/texmf/tex/latex/base/report.cls)
 %% with major modifications made by Amit Jain, Alex Feldman, and Mike
-%% Stark.  Some ideas from Nelson Beebe's "uuthesis.sty" have been 
+%% Stark.  Some ideas from Nelson Beebe's "uuthesis.sty" have been
 %% incorporated; other University of Utah students have also contributed
 %% to that style.
 %%
-%% The purpose of this class file is to make it easier for students to 
-%% format thesis, dissertation and project reports to conform (as closely 
-%% as is reasonably possible) to the formatting requirements set forth in the 
-%% document "Standards for the preparation of dissertations, theses, and projects" 
+%% The purpose of this class file is to make it easier for students to
+%% format thesis, dissertation and project reports to conform (as closely
+%% as is reasonably possible) to the formatting requirements set forth in the
+%% document "Standards for the preparation of dissertations, theses, and projects"
 %% compiled by the Graduate College.  The primary variations are
 %%
-%%   - Vertical and horizontal spacing is handled by the TeX software; there 
+%%   - Vertical and horizontal spacing is handled by the TeX software; there
 %%     is no specific notion of "single" or "double" spacing.  This
 %%     document class uses the \doublespacing command in the 'setspace'
 %%     package, which stretches the baseline by a factor of 1.655 (which is
-%%     a carefully constructed standard value).  For "single spaced" text, 
+%%     a carefully constructed standard value).  For "single spaced" text,
 %%     the default baselineskip is used.
 %%
 %%   - Vertical spacing around headings varies with the formatting as done
 %%     by TeX.  The "raggedbottom" option is in effect, which allows for
-%%     some extra space at the bottom of pages; however, heading space and 
+%%     some extra space at the bottom of pages; however, heading space and
 %%     space around floating elements remains variable.
 %%
 %%   - Running text is justified.  The first line of paragraphs is indented
@@ -39,13 +39,13 @@
 %%     chapters are numbered (sequentially) with Arabic numbers.  Chapters
 %%     are indexed by number in the table of contents.
 %%
-%%   - Section headings (first-level subheadings) are set at the left margin, 
-%%     in 14 point bold font; they are numbered with the chapter number and 
+%%   - Section headings (first-level subheadings) are set at the left margin,
+%%     in 14 point bold font; they are numbered with the chapter number and
 %%     section number separated by a period.
 %%
-%%   - Subsection headings (second-level subheadings) are also set at the 
-%%     left margin, but in 12 point bold font; they are numbered with the 
-%%     chapter number, section number, and subsection number, also separated 
+%%   - Subsection headings (second-level subheadings) are also set at the
+%%     left margin, but in 12 point bold font; they are numbered with the
+%%     chapter number, section number, and subsection number, also separated
 %%     by a period.
 %%
 %%   - Subsubsubsection headings (third-level subheadings) are set at the
@@ -53,21 +53,21 @@
 %%     appear in the table of contents
 %%
 %%   - Paragraph headings (fourth-level subheadings) are set at the left
-%%     margin, in 12 point bold font, and are unnumbered.  
+%%     margin, in 12 point bold font, and are unnumbered.
 %%
-%%   - Subparagraph headings (fifth-level subheadings) are indented as 
-%%     paragraphs are indentated.  
+%%   - Subparagraph headings (fifth-level subheadings) are indented as
+%%     paragraphs are indentated.
 %%
 %%   - The bibliography is the standard LaTeX "plain" style, in which
 %%     entries are alphabetized by first letter of the (first) author's
-%%     last name, and are indexed by Arabic numbers starting from 1.  
+%%     last name, and are indexed by Arabic numbers starting from 1.
 %%     An entry is formatted with its index enclosed in brackets set at
 %%     the left margin, followed by approximately an en space, followed
-%%     by the entry.  The text for multiline entries is left-aligned 
-%%     with the text of the first line of the entry.  
+%%     by the entry.  The text for multiline entries is left-aligned
+%%     with the text of the first line of the entry.
 %%
 %%   - Bibliography entries vary by the type of the reference.  Generally
-%%     the order of the entries is: author(s), title, venue, volume/number, 
+%%     the order of the entries is: author(s), title, venue, volume/number,
 %%     year, publisher.  Book titles are set in italic, with all but minor
 %%     words capitalized.  For journal and conference articles, the journal
 %%     name or conference venue is set in italic, with the article title
@@ -76,7 +76,7 @@
 %%     as a superscript.
 %%
 %% Otherwise, the format closely matches the standards.  This class was
-%% was developed with computer science students in mind, but should be 
+%% was developed with computer science students in mind, but should be
 %% equally useful for students in any department.
 %%
 %% NOTE: students should not need to make any changes to this file.
@@ -92,7 +92,7 @@
 %%   * There is no LaTeX 2.09 compatibility mode.
 %%
 %%   * This is intended to be a standalone file, with minimal dependence
-%%     on other packages.  
+%%     on other packages.
 %%
 %%   * Options that would result in an unacceptable format, such as font size,
 %%     paper size, and two-column options are not available.
@@ -100,7 +100,7 @@
 %%   * Rather than include "size12.clo" and "report.cls" via \include,
 %%     the contents have been pasted into this file and modified.
 %%
-%%   * The "monolithic pastes" are kept as close as possible to the 
+%%   * The "monolithic pastes" are kept as close as possible to the
 %%     originals.  Whenever possible (and reasonable), customizations are
 %%     done using macros defined in a separate section.
 %%
@@ -115,10 +115,10 @@
 %%
 %%   * The vertical spacing is a bit loose.  We might consider changing the
 %%     glue around headings, especially chapter headings, to tighten it up.
-%%     
-%%   * A thought about a class option for truly ragged bottom, which would 
-%%     essentially eliminate any vertical rubber space.  But I didn't actually 
-%%     implement it.  I put this in because the wide spacing in short pages 
+%%
+%%   * A thought about a class option for truly ragged bottom, which would
+%%     essentially eliminate any vertical rubber space.  But I didn't actually
+%%     implement it.  I put this in because the wide spacing in short pages
 %%     bothers some people.
 %%
 %%   * I know there are standards for documenting LaTeX class files. This
@@ -127,11 +127,11 @@
 %%   * As it stands, sectioning in the list List of Abbreviations and the
 %%     List of Figures doesn't work well: it just inserts a centered section-
 %%     style line with some glue.
-%%  
-%%   * The standards allow for a "List of Pictures/Maps" in the front matter. It 
-%%     seems unlikely that CS students would need them, but it might be worthwhile 
+%%
+%%   * The standards allow for a "List of Pictures/Maps" in the front matter. It
+%%     seems unlikely that CS students would need them, but it might be worthwhile
 %%     including them.
-%%    
+%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \typeout{Boise State University thesis/dissertation class 2nd December, 2022}
@@ -156,29 +156,29 @@
 %%
 %% Class Options
 
-%% To keep things simple, most of the options that don't apply to the 
-%% standards document for a project/thesis at Boise State are removed. 
-%% Keeping them in might lead to confusion, and any student who wants 
-%% to use more extensive options (say, for a "personal" version) of 
-%% his/her thesis can always switch to a different class file.  
+%% To keep things simple, most of the options that don't apply to the
+%% standards document for a project/thesis at Boise State are removed.
+%% Keeping them in might lead to confusion, and any student who wants
+%% to use more extensive options (say, for a "personal" version) of
+%% his/her thesis can always switch to a different class file.
 %%
-%% There is no paper size option.  The requirement is U.S. letter 
-%% (8.5-by-11 inch paper), and this is unlikely to change due to binding 
-%% and shelf size issues.  I suppose a student from Europe might want to 
+%% There is no paper size option.  The requirement is U.S. letter
+%% (8.5-by-11 inch paper), and this is unlikely to change due to binding
+%% and shelf size issues.  I suppose a student from Europe might want to
 %% print the work on A4 paper or something, but as it stands it will fit
 %% on A4, with a shorter right margin and longer bottom margin.
 %%
 %% The thesis standard requires 12 point font, so there is no point in
-%% making the font size an option.   The formatting stuff is a lot simpler 
+%% making the font size an option.   The formatting stuff is a lot simpler
 %% if we stick to one font size.  Likewise, two-column formatting is not
 %% allowed, so there is no reason to provide the option for it.
 
-%% Set the paper size for standard U.S. "letter" paper 
-\setlength\paperheight{11in} 
+%% Set the paper size for standard U.S. "letter" paper
+\setlength\paperheight{11in}
 \setlength\paperwidth{8.5in}
 
-%% The "openright" option causes new chapters to start (be opened) on an 
-%% odd-numbered page.  I set this to the default in two-sided mode, but in 
+%% The "openright" option causes new chapters to start (be opened) on an
+%% odd-numbered page.  I set this to the default in two-sided mode, but in
 %% single-sided mode it is probably not a good idea.  So it's not an option.
 \newif\if@openright
 \@openrightfalse
@@ -188,7 +188,7 @@
 \DeclareOption{oneside}{\@twosidefalse \@mparswitchfalse}
 \DeclareOption{twoside}{\@twosidetrue  \@mparswitchtrue \@openrighttrue}
 
-%% The "draft" option just changes the fussiness about overfull boxes, 
+%% The "draft" option just changes the fussiness about overfull boxes,
 %% which simplifies and maybe even speeds up formatting.  This can be
 %% useful when one is making frequent changes and recompiling.
 \DeclareOption{draft}{\setlength\overfullrule{5pt}}
@@ -200,7 +200,7 @@
 %%\DeclareOption{fleqn}{\input{fleqn.clo}}
 
 %% The "openbib" options produces a bibliography in "open" style,
-%% rather than the "condensed" style.  It probably shouldn't be used, 
+%% rather than the "condensed" style.  It probably shouldn't be used,
 %% but I'll leave it in.
 \DeclareOption{openbib}{%
   \AtEndOfPackage{%
@@ -214,9 +214,9 @@
 }
 
 %% The "dissertation" option causes the document to be formatted as a dissertation
-%% rather than a thesis.  
+%% rather than a thesis.
 %% The "project" option causes the document to be formatted as a project
-%% report rather than a thesis.  
+%% report rather than a thesis.
 %% At the moment there isn't much difference, but in future versions there might be.
 
 \newif\if@dissertation
@@ -449,7 +449,7 @@
 %%
 %% report.cls stuff
 %%
-%% This is a monolithic paste from report.cls.  
+%% This is a monolithic paste from report.cls.
 
 %% The paste starts just after the \input{size\@ptsize.clo} line
 %% Most of the customization stuff has been moved to the end
@@ -715,7 +715,7 @@
 \DeclareRobustCommand*\cal{\@fontswitch\relax\mathcal}
 \DeclareRobustCommand*\mit{\@fontswitch\relax\mathnormal}
 \newcommand\@pnumwidth{\@pagenumwidth}  %! for approximate number of pages
-\newcommand\@tocrmarg{2.55em}     
+\newcommand\@tocrmarg{2.55em}
 \newcommand\@dotsep{\@TOCdotsep}  %! dot leader separation
 \setcounter{tocdepth}{2}
 \newcommand\tableofcontents{%
@@ -766,7 +766,7 @@
       \nobreak
       \hb@xt@\@pnumwidth{\hfil\normalfont \normalcolor #2}%
       \par
-      %! (it was just this) 
+      %! (it was just this)
       % #1\nobreak\hfil \nobreak\hb@xt@\@pnumwidth{\hss #2}\par
       \penalty\@highpenalty
     \endgroup
@@ -813,7 +813,7 @@
       \singlespacing
       %! again, the place-in-document stuff
       \@appendixfalse
-      %! include it in the table of contents 
+      %! include it in the table of contents
       \addcontentsline{toc}{chapter}{\bibname}%
       \@mkboth{\MakeUppercase\bibname}{\MakeUppercase\bibname}%
       \list{\@biblabel{\@arabic\c@enumiv}}%
@@ -916,7 +916,7 @@
 \def\normalspacing{\doublespacing}
 
 %% Set the font and spacing (this is necessary for setting up some spacing)
-\normalsize 
+\normalsize
 \normalspacing  %% use double spacing throughout, by default
 
 %% Some extra where-am-I-in-the-document ifs
@@ -930,20 +930,20 @@
 %%
 %% Margin Stuff
 %%
-%% The thesis standards manual specifies 1 inch top, bottom, and right 
+%% The thesis standards manual specifies 1 inch top, bottom, and right
 %% margins, and a 1.5 inch left margin.  Unfortunately, it is not clear
-%% how the header and footer (which contain only page numbers) fit into this.  
-%% I am taking it literally, to mean that all text on the page, including the 
+%% how the header and footer (which contain only page numbers) fit into this.
+%% I am taking it literally, to mean that all text on the page, including the
 %% page numbers, are to be placed inside the margins.
 %%
-%% TeX margins are a little weird: text on a page is offset 1 inch from the 
+%% TeX margins are a little weird: text on a page is offset 1 inch from the
 %% top and 1 inch from the left, the "device margins" (my understanding is
 %% those are hard-coded into TeX and never change).  But in this case it
 %% does simplify things, because the top margin matches the requirement.
 
 %% The distance from the top of the page to the top of the header is
 %% \topmargin plus 1 inch
-\setlength{\topmargin}{0in}  
+\setlength{\topmargin}{0in}
 
 %% \headheight is the height of the header.  We want it just large enough
 %% to contain the page number, which I'm taking to be the height of the
@@ -964,11 +964,11 @@
 \setlength{\evensidemargin}{\oddsidemargin}
 
 %% The right margin is controlled by \textwidth: the right margin is the
-%% page width minus \textwidth, minus the (total) left margin. 
+%% page width minus \textwidth, minus the (total) left margin.
 \setlength{\textwidth}{6.0in}
 
 %% Similarly, the bottom margin is determined by \textheight, which is the
-%% height of the text body.  For a 1 inch bottom margin this would normally 
+%% height of the text body.  For a 1 inch bottom margin this would normally
 %% by 9 inches, but we have to subtract the height and spacing of the header.
 \setlength{\textheight}{9in}
 \advance\textheight by -\headsep
@@ -1016,17 +1016,17 @@
 
 %% float placement parameters             (what I used in 'myuuthesis.cls')
 \setcounter{topnumber}{2}                 %% 10
-\renewcommand\topfraction{.7}		  %%  1 
+\renewcommand\topfraction{.7}		  %%  1
 \setcounter{bottomnumber}{1}		  %% 10
-\renewcommand\bottomfraction{.3}	  %%  1 
+\renewcommand\bottomfraction{.3}	  %%  1
 \setcounter{totalnumber}{3}		  %% 20
-\renewcommand\textfraction{.2}		  %%  0 
+\renewcommand\textfraction{.2}		  %%  0
 \renewcommand\floatpagefraction{.5}	  %% .5
 \setcounter{dbltopnumber}{2}		  %% 10
-\renewcommand\dbltopfraction{.7}	  %%  1 
+\renewcommand\dbltopfraction{.7}	  %%  1
 \renewcommand\dblfloatpagefraction{.5}	  %% .5
 
-%% Glue (rubber space), in some of the paragraph stuff, causes trouble.  
+%% Glue (rubber space), in some of the paragraph stuff, causes trouble.
 %% It might be necessary to use these definitions in some situations.
 
 %\topsep=10pt
@@ -1108,7 +1108,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
 %% Some Potentially Useful Commands and Environments
-%% 
+%%
 
 %% Some day we should decide on a style for these
 
@@ -1129,7 +1129,7 @@
 %% Front Matter Macros
 %%
 %% The content of the front matter pages are controlled through macros,
-%% which are (presumably) set in the document.    
+%% which are (presumably) set in the document.
 
 %% \title is the title of the dissertation or thesis or project
 \renewcommand{\title}[1]{\gdef\@title{#1}\gdef\@upcasetitle{\uppercase{#1}}}
@@ -1141,7 +1141,7 @@
 
 % \defenseDate is the date of the defense
 \newcommand{\defenseDate}[1]{\gdef\@defenseDate{#1}}
-%% \graduationMonth and \graduationYear are the day, month and year, respectively, 
+%% \graduationMonth and \graduationYear are the day, month and year, respectively,
 %% of graduation.
 \newcommand{\graduationYear}[1]{\gdef\@graduationYear{#1}}
 \newcommand{\graduationMonth}[1]{\gdef\@graduationMonth{#1}}
@@ -1218,7 +1218,7 @@
 \newcommand{\listsymbolname}{LIST OF SYMBOLS}
 
 %% According to the standards, the bibliography is entitled "References"
-%% or "Works Cited" if all the bibliography elements are cited in the 
+%% or "Works Cited" if all the bibliography elements are cited in the
 %% document; otherwise it is called "Bibliography".  Rather than setting
 %% the name directly, it's better to define a macro to change the name,
 %% to preserve consistent capitalizations
@@ -1230,14 +1230,14 @@
 \fi
 
 %% The name \copyright is already used (for the copyright symbol);
-%% this \includeCopyright macro instructs the \frontmatter command to include 
+%% this \includeCopyright macro instructs the \frontmatter command to include
 %% the copyright page; the optional argument is a copyright year, in case
 %% there is some reason it is different from \graduationYear
 
 \newcommand{\includeCopyright}[1][\expandafter\@graduationYear]{
   \@copyrighttrue \gdef\@copyrightyear{#1}}
 
-%% \numPages sets the approximate number of pages, to help format the 
+%% \numPages sets the approximate number of pages, to help format the
 %% table of contents
 \newlength{\@pagenumwidth}
 \settowidth{\@pagenumwidth}{\normalsize\normalfont 99}
@@ -1288,12 +1288,12 @@
     %%
     %% This is tricky, because the author's name is supposed to be vertically
     %% centered at the middle of the page.  I'm handling this by putting the
-    %% title in a vbox that extends all the way to the top of the "by" 
+    %% title in a vbox that extends all the way to the top of the "by"
     %% (the start of the author's byline).  This also allows for a multiline
     %% title without adjusting the formatting.  (I stole this idea straight
     %% from Nelson Beebe's uuthesis.sty)
-    %% 
-    \begin{center}    
+    %%
+    \begin{center}
       %% the \@toTwoInches strut doesn't work here, because the 'center'
       %% environment adds \topskip.  So that length has to be subtracted
       %% from \@toTwoInches
@@ -1333,7 +1333,7 @@
 
 
 \def\@makecopyright{\begin{titlepage}
-  %% Another hack, this time to put the copyright in the footer 
+  %% Another hack, this time to put the copyright in the footer
   %% (for that the infernal 1-inch bottom margin business!)
   %% This seems a bit convoluted, but it was the only thing I could
   %% figure out to get the copyright notice to extend above the footer
@@ -1378,9 +1378,9 @@
   \thispagestyle{empty}
   \begin{center}
    of the  {\@masterstype} submitted by
- 	\vspace{12pt}\\ 
+ 	\vspace{12pt}\\
    {\@author}
- 	\vspace{12pt} 
+ 	\vspace{12pt}
   \end{center}
   \singlespacing
   \noindent {\@Masterstype} Title: {\@title}\\[12pt]
@@ -1447,7 +1447,7 @@
   		\if@committeeC{\@titleC}:\underline{\hspace{2in}} \hfill \makebox[2in][l]{\@committeeC}\\[12pt]\fi
   		\if@committeeD{\@titleD}:\underline{\hspace{2in}} \hfill \makebox[2in][l]{\@committeeD}\\[12pt]\fi
   		{\@titleGC}:\underline{\hspace{2in}} \hfill \makebox[2in][l]{\@gradCoordinator}\\[12pt]
-		
+
 	\end{minipage}
   \end{flushleft}
 
@@ -1476,9 +1476,9 @@
 %  \thispagestyle{empty}
 %  \begin{center}
 %   of the  {\@masterstype} submitted by
-% 	\vspace{12pt}\\ 
+% 	\vspace{12pt}\\
 %   {\@author}
-% 	\vspace{12pt} 
+% 	\vspace{12pt}
 %  \end{center}
 %  \noindent To the Graduate College of Boise State University:
 %
@@ -1489,7 +1489,7 @@
 %  consistent and acceptable; (3) the illustrative materials including
 %  figures, tables, and charts are in place; and (4) the final manuscript
 %  is ready for submission to the Graduate College.
-%  
+%
 %  \label{finalApproval}
 %  \begin{flushright}
 %    \begin{minipage}{3.75in}
@@ -1517,7 +1517,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
-%% Abstract 
+%% Abstract
 
 \newcommand{\abstract}[1]{\long\gdef\@abstract{#1}}
 \def\@makeabstract{%
@@ -1537,7 +1537,7 @@
 \newcommand{\dedication}[1]{\@dedicationtrue\long\gdef\@dedication{#1}}
 
 \def\@makededication{%
-  \newpage
+  % \newpage
   \chapter*{\dedicationame}
   \hspace*{\parindent}\@dedication
 %  \mbox{}\vfill\centerline{\@dedication}\vfill
@@ -1562,7 +1562,7 @@
 %%
 %% List of Abbreviations
 %%
-%% This, and the List of Symbols, is probably too complicated to be defined 
+%% This, and the List of Symbols, is probably too complicated to be defined
 %% in the preamble, so I am creating a separate environment for it.
 
 \newif\if@abbrevlist\@abbrevlistfalse
@@ -1590,7 +1590,7 @@
 %%
 %% List of Symbols
 %%
-%% This, and the List of Symbols, is probably too complicated to be defined 
+%% This, and the List of Symbols, is probably too complicated to be defined
 %% in the preamble, so I am creating a separate environment for it.
 
 \newif\if@symbollist\@symbollistfalse
@@ -1624,7 +1624,7 @@
 
 
 %% \buildFrontPages builds all the front matter pages, and prepares for the
-%% main text.  It also checks for the required definitions and reports an 
+%% main text.  It also checks for the required definitions and reports an
 %% error for any that are missing.
 
 \newcommand{\buildFrontPages}{
@@ -1689,7 +1689,6 @@
   \pagenumbering{arabic}  %% switch to Arabic numbers (resets the page counter)
   \@frontmatterfalse      %% end front matter
   \@mainmattertrue        %% start main matter
-  \flushbottom
 }
 
 \newcommand{\backmatter}{
