@@ -3,7 +3,7 @@
 %\documentclass[project]{bsu-cs}  % for project reports
 \documentclass[dissertation]{bsu-cs}  % for dissertation
 
-% "bsu-cs" is our "in-house" class file for Boise State dissertations, theses 
+% "bsu-cs" is our "in-house" class file for Boise State dissertations, theses
 % and project reports.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -14,14 +14,14 @@
 % document-wide definitions, and the main document text.  The preamble starts
 % with the \documentclass command and ends with the \begin{document} command.
 % The main text is contained between the \begin{document} and \end{document}
-% commands.  
+% commands.
 %
 % Only LaTeX commands (and whitespace) are allowed in the preamble.  A LaTeX
 % command has the form
 %
 %   \<name>{<arg>}{<arg>}...
 %
-% where the number of arguments is set by the command definition. 
+% where the number of arguments is set by the command definition.
 % Some commands allow an optional argument
 %
 %   \name[<opt>]{<arg>}{<arg>}...
@@ -30,17 +30,17 @@
 %
 %   \begin{<name>}...\end{<name>}
 %
-% which can be nested, but must be balanced. 
+% which can be nested, but must be balanced.
 %
 % (If you haven't already guessed, anything after a '%' character on a line
 % is taken as a comment and ignored.)
 %
-% In the main text all non-commands and non-comments are treated as ordinary 
-% text.  LaTeX normally treats any run of spaces as a single space.  Line 
+% In the main text all non-commands and non-comments are treated as ordinary
+% text.  LaTeX normally treats any run of spaces as a single space.  Line
 % breaks are ignored (TeX uses its own linebreaking algorithm); blank lines
 % are paragraph separators.  Runs of blank lines are treated as a single
 % blank line.  A common mistake novice users make is to try to use literal
-% spacing and line breaks in the .tex file to control formatting.  
+% spacing and line breaks in the .tex file to control formatting.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Packages
@@ -153,18 +153,18 @@
 % Front Matter Definitions
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% These definitions are used by the commands below to construct the front 
-% matter pages.  
+% These definitions are used by the commands below to construct the front
+% matter pages.
 
 % Document title
 % The \titleBreak command produces a line break in the title on the
 % title page (this may be necessary to keep longer titles from looking
 % strange)
-\title{An Ode to Wabi-sabi:\titleBreak Homage to a Great and Wonderful Person}  
+\title{An Ode to Wabi-sabi:\titleBreak Homage to a Great and Wonderful Person}
 
 % Author's name (must be exactly what name the Registrar has)
 % normally it is of the form "First Middle Last"
-\author{Wabi-sabi Admirer}  
+\author{Wabi-sabi Admirer}
 
 % Day of oral defense
 \defenseDate{1st December, 2022}
@@ -173,23 +173,23 @@
 \graduationMonth{December}
 
 % Year of graduation
-\graduationYear{2022} 
+\graduationYear{2022}
 
-% Advisor (chair) 
+% Advisor (chair)
 % Use full name, with surname last, without any titles
 % The \advisor command accepts an optional argument that specifies the
 % advisor's position, which defaults to "Advisor"; for example,
 %
-% \advisor[Chair]{Wabi-sabi the Great} 
+% \advisor[Chair]{Wabi-sabi the Great}
 %
-% causes "Chair" to appear on the approval page (the one with the signatures) 
+% causes "Chair" to appear on the approval page (the one with the signatures)
 % in place of "Advisor"
 \advisor{Wabi-sabi The Great, Ph.D.} % also the chair of your committee
 
 % Committee members: \committeeA is listed first after the advisor,
 % \committeeB second, etc.  An optional argument is accepted to replace
 % the default "Committee Member" position.
-\committeeA{Aaa, Ph.D.} 
+\committeeA{Aaa, Ph.D.}
 \committeeB{Bbb, Ph.D.}
 
 % Masters or PhD committees normally have three members, but in case there is
@@ -208,7 +208,7 @@
 % Major department
 \department{Computer Science}
 
-% College 
+% College
 \college{Engineering}
 
 % Current department chair (at the moment, this is not used)
@@ -221,7 +221,7 @@
   conclusions.  Keep in mind that a casual observer is likely to judge the content of the document
   by the abstract and title alone.  (There is an old adage: ``in a joke, the punchline comes
   at the end; in a paper [or thesis], it comes in the abstract.'')  A single concise paragraph
-  usually suffices for the abstract.  If it spills onto a second page, it is probably too long.  
+  usually suffices for the abstract.  If it spills onto a second page, it is probably too long.
 }
 
 
@@ -229,7 +229,7 @@
 
 % \includeCopyright causes a copyright page to be produced.  It is not
 % required; in fact, a copyright notice is no longer needed to ensure
-% copyright protection.  
+% copyright protection.
 \includeCopyright
 
 % \maxPage is used to format the page numbers in the table of contents.
@@ -238,7 +238,7 @@
 %
 % \maxPage{99} for less than 100 pages (this is the default)
 % \maxPage{199} for less than 200 pages
-% \maxPage{999} for less than 1000 pages 
+% \maxPage{999} for less than 1000 pages
 %
 % (If the work is more than 1000 pages, consider cutting it down!)
 % The space has to be wide enough for front matter page numbers, which are
@@ -248,8 +248,8 @@
 \maxPage{199}
 
 % The Acknowledgments page is a place for the author to express thanks
-% or generally acknowledge anyone or anything that assisted in the 
-% project or research.  If the student was supported even in part by 
+% or generally acknowledge anyone or anything that assisted in the
+% project or research.  If the student was supported even in part by
 % funding from research grant, it needs to be acknowledged here.
 % The Acknowledgments section can have multiple pages, just like the
 % Abstract section, but like the abstract, more than one page is probably
@@ -296,15 +296,15 @@ Wabi-sabi.
 \begin{document}
 
 % The \frontmatter command prepares for front matter material
-\frontmatter  %! Do not remove! 
+\frontmatter  %! Do not remove!
 
 % The \buildFrontPages builds all the front matter pages
-\buildFrontPages %! Do not remove! 
+\buildFrontPages %! Do not remove!
 
 % The (optional) list of abbreviations goes here
 \begin{listAbbreviations}
   \item[LOL] Laughing Out Loud
-  \item[OMG] Oh My God! 
+  \item[OMG] Oh My God!
   \item[ROFL] Rolling on the Floor Laughing
 \end{listAbbreviations}
 
@@ -525,7 +525,7 @@ for more details. Note that the references are cited by the last names of all au
 authors or less. For more than three authors, ``et al'' can be used.
 
 %! The \label command applies to the most recent heading in the main text,
-%! or the current figure or table.  
+%! or the current figure or table.
 %! The \pageref{<tag>} command references the page number of a label.
 Check the References on page~\pageref{references} for an example of how to format the references.
 
@@ -542,9 +542,9 @@ Thesis and dissertation text is normally ``double'' spaced.  It is customary to 
 literal code.  Figure~\ref{fig:code} shows a sample Java program.
 
 % The 'figure' environment starts a new figure, which is a type of
-% "floating" element.  That means it goes where LaTeX decides to put it, 
+% "floating" element.  That means it goes where LaTeX decides to put it,
 % rather than at the current point in the running text.  Don't be surprised
-% when figures and tables get placed in unexpected places.  
+% when figures and tables get placed in unexpected places.
 %
 % You can control, to some degree, where floating elements go by setting
 % the optional argument of \begin{figure}.  The options are
@@ -560,17 +560,17 @@ literal code.  Figure~\ref{fig:code} shows a sample Java program.
 % page ([tp*] is in fact the default set in "bsu-cs.cls").  Avoid using
 % [h] by itself--it is inflexible and can cause formatting problems.  At
 % the same time, it can be very useful in forcing figure placement.
-% Finessing figure placement is a typesetting task that you just have to get 
-% used to, no matter what system you are using.  
-% 
-% WARNING: when LaTeX has trouble placing floating elements, it sometimes 
-%          puts all of them at the very end of the document.  So if your 
+% Finessing figure placement is a typesetting task that you just have to get
+% used to, no matter what system you are using.
+%
+% WARNING: when LaTeX has trouble placing floating elements, it sometimes
+%          puts all of them at the very end of the document.  So if your
 %          figures and tables suddenly disappear, check the end of the
 %          document.  Adding more 'p' specifiers can help with this.
 
 \begin{figure}[t]
 
-\begin{vcode}  
+\begin{vcode}
 % an alternative to 'singlespace', that also shrinks the
 % typewriter font so that it blends better with the text
 \begin{lstlisting}
@@ -585,7 +585,7 @@ public static BigInteger power(BigInteger x, int n)
     BigInteger temp = x;
     BigInteger result = BigInteger.ONE;
 	while (n != 0) {
-        if ((n & 1) == 1) 
+        if ((n & 1) == 1)
             result = result.multiply(temp);
 		if ((n = n >>>1) != 0)
            	temp = temp.multiply(temp);
@@ -605,7 +605,7 @@ also serves as an example of the inclusion of literal code.}
 %
 % WARNING: the labels can get screwed up if the label in a figure is given
 %          before the caption (another one of LaTeX's quirks)
-\label{fig:code} 
+\label{fig:code}
 \end{figure}
 
 
@@ -659,7 +659,7 @@ shows how to include an image (in PDF, JPG or PNG) into a LaTeX document.
 
 \begin{figure}[h]
 % Code in figures is normally not centered, but graphical figures are
-% (the \centering command works as well as the 'center' environment, 
+% (the \centering command works as well as the 'center' environment,
 % because its scope is limited to the figure).
 \begin{center}
 \includegraphics*[width=4.0in,keepaspectratio]{figure}
@@ -678,9 +678,9 @@ Table~\ref{tbl:CSSSM} shows the formatting and labeling for a table.
 \centerline{
 \begin{tabular}{|l|cccc|}
 \hline
-& Sorted $X+Y$ & \multicolumn{2}{c}{Matrix with sorted rows} & Matrix with sorted \\ 
+& Sorted $X+Y$ & \multicolumn{2}{c}{Matrix with sorted rows} & Matrix with sorted \\
 &  & \multicolumn{2}{c}{and sorted columns} & columns \\ \cline{2-5}
-& $|X|=|Y|=n$ &  $n \times m$, $m \leq n$ & $n \times n$ & $n \times m$ \\ 
+& $|X|=|Y|=n$ &  $n \times m$, $m \leq n$ & $n \times n$ & $n \times m$ \\
 \hline
 $k = \Theta(mn)$ or $\Theta(n^2)$ & $\Theta(n)$ & $\Theta(m
 \log (2n/m))$ & $\Theta(n)$ & $\Theta(m \log n)$ \\
@@ -712,7 +712,7 @@ N &M & &1 &5 &10 &15 &20 &25 &30\\ \hline
 \label{tbl:SPWC}
 \centerline{
 \begin{tabular}{|lc|c|c|c|c|c|c|c|c|}
-\hline 
+\hline
 \multicolumn{3}{|c|}{Parameters}   & \multicolumn{7}{|c|}{Process Number}\\ \hline
 N &M & &1 &10 &20 &30 &40 &50 &60\\ \hline
 128 &600 &MPI(speedup) &1 &5.18 &7.67 &8.24 &6.99 &5.55 &4.49\\ \cline {3-10}
@@ -759,11 +759,11 @@ research.
 % One way of constructing the bibliography is to list the entries explicitly
 % in a 'thebibliography' environment, which is done here.
 %
-% If you prefer, you can use the 'bibtex' program, which formats the 
+% If you prefer, you can use the 'bibtex' program, which formats the
 % bibliography from a separate .bib file of "BibTeX" entries.  An advantage
 % is that most references are available online in bibtex format, and
 % doing cut-and-paste from the web browser can save you a lot of work.
-% But it also adds extra complication.  The normal sequence, after you 
+% But it also adds extra complication.  The normal sequence, after you
 % have changed anyting in the .bib file is
 %
 %   latex <filename>.tex
@@ -775,7 +775,7 @@ research.
 % Literal Bibliography
 
 % The 99 means make labels be as wide as the width of the number 99
-\begin{thebibliography}{99} 
+\begin{thebibliography}{99}
 \label{references}
 \bibitem{ws:book1} Wabi-sabi The Great. \emph{The World According to Wabi-sabi.} NoWabi-sabi
 Press, Wabi-sabiland, 1922.
@@ -818,7 +818,7 @@ Here is Appendix A. See Appendix~\ref{app:Setup} for the experimental setup.
 Here is Appendix~\ref{app:Setup}.
 
 
-% The \finish command is executed just before the \end{document}. 
+% The \finish command is executed just before the \end{document}.
 % Among other thigs, it produces the requisite blank page at the end
 % of the document.
 \finish  %! Do not remove!
