@@ -1689,7 +1689,6 @@
   \pagenumbering{arabic}  %% switch to Arabic numbers (resets the page counter)
   \@frontmatterfalse      %% end front matter
   \@mainmattertrue        %% start main matter
-  \flushbottom
 }
 
 \newcommand{\backmatter}{

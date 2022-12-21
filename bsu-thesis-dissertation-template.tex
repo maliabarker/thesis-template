@@ -2,6 +2,7 @@
 %\documentclass{bsu-cs}  % default is thesis
 %\documentclass[project]{bsu-cs}  % for project reports
 \documentclass[dissertation]{bsu-cs}  % for dissertation
+\usepackage[inner=1.5in,outer=1in,letterpaper,twoside]{geometry}
 
 % "bsu-cs" is our "in-house" class file for Boise State dissertations, theses
 % and project reports.
@@ -135,11 +136,11 @@
 
 % Generate intra-document links and also allows url and href commands for
 % to generate embedded links in the document.
-\usepackage{hyperref}
-\hypersetup{
-	colorlinks=true,
-	allcolors=blue,
-}
+% \usepackage{hyperref}
+% \hypersetup{
+% 	colorlinks=true,
+% 	allcolors=blue,
+% }
 
 
 
@@ -403,10 +404,12 @@ For example
 %
 % WARNING: 'verbatim' doesn't expand tab characters, so if you cut and paste
 % be sure to remove any tabs (you can use the 'M-x untabify' command in emacs).
+
 \begin{verbatim}
     TEXINPUTS=.:/usr/local/texinputs/:/usr/share/texmf//
     export TEXINPUTS
 \end{verbatim}
+
 adds \texttt{/usr/local/texinputs}, a possible location for \texttt{bsu-cs.cls}, although it
 will not take effect until you \texttt{source} the \texttt{.bashrc} file, or log in again.
 
@@ -429,8 +432,8 @@ to \texttt{bsu-cs.cls} (but gives you the option to copy the updated file if you
 
 % The \footnote command creates a footnote
 So who is Wabi-sabi? We need a lot of text in here to see what happens when we hit the bottom of
-a page with text and try out things like footnotes\footnote{What's not to like about footnotes,
-anyway?  Brian O'Nolan and George MacDonald Fraser both used them to great effect}.
+a page with text and try out things like footnotes
+\footnote{What's not to like about footnotes, anyway?  Brian O'Nolan and George MacDonald Fraser both used them to great effect}.
 So here is some extra stuff:%
 \footnote{Too many footnotes, however, can be distracting.}
 % A '%' comment character at the end of a line, like above, has the
@@ -628,7 +631,7 @@ Here is an itemized list of all the mysteries of Wabi-sabi.
 
 Here is a simple table.
 
-\begin{table}[h] % 'h' in this case prevents the table from being placed
+\begin{table}[ht] % 'h' in this case prevents the table from being placed
                  % too close to the figure
 % By custom, the caption of a table is placed at the top of the table.
 \caption{The Approximate Time of Parallelizing Each Code}
@@ -657,7 +660,7 @@ HPF                        &3 hours   &1 1/2 weeks  &1 month\\ \hline
 Check Figure~\ref{fig:fuzzyImage} for what happens when Wabi-sabi gets compiled. This example
 shows how to include an image (in PDF, JPG or PNG) into a LaTeX document.
 
-\begin{figure}[h]
+\begin{figure}[ht]
 % Code in figures is normally not centered, but graphical figures are
 % (the \centering command works as well as the 'center' environment,
 % because its scope is limited to the figure).
