@@ -19,8 +19,11 @@ command line, use `pdflatex` to generate PDF properly from LaTeX document.
 On Windows, you can get the [MikTEX](miktex.org) package and use the style files provided
 here.
 
-The template repository is maintained by Amit Jain. Please contact Amit with any
-additional questions. Thanks to Mike Stark for a complete rewrite and Alex Feldman with
-help in maintenance.
+Contributors
+------------
 
--Amit
+* Amit Jain (ajain@boisestate.edu) is the primary maintainer. Please contact him with questions.
+* Mike Stark: a complete rewrite at one point.
+* Alex Feldman: help with maintenance.
+* Graham Annett: help with maintenance.
+
