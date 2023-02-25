@@ -1,4 +1,11 @@
 
+Feb 2022 (Amit, Graham)
+----------------------
+
+-Resolved twoside issue with a hack using geometry package
+-Made oneside be the default
+-Made changes on websites to point to the GitHub repo so students can get the latest release
+
 Dec 2022 (Amit)
 --------------
 
