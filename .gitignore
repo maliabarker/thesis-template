@@ -1,2 +1,13 @@
 bsu-proposal.pdf
 bsu-thesis-dissertation-template.pdf
+*.fls
+*.fdb_latexmk
+*.log
+*.aux
+*.dvi
+*.toc
+*.aux
+*.lot
+*.lof
+*.ps
+*.out
