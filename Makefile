@@ -2,8 +2,7 @@
 OBJS= bsu-thesis-dissertation-template.pdf bsu-proposal.pdf
 
 .tex.pdf:
-	pdflatex --shell-escape -halt-on-error $< > $<.log
-	pdflatex --shell-escape -halt-on-error $< > $<.log
+	@latexmk -pdf -latexoption=-shell-escape $<
 
 all: $(OBJS)
 
