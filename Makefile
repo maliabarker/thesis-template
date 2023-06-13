@@ -4,7 +4,7 @@
 	pdflatex --shell-escape -halt-on-error $< > $<.log
 	pdflatex --shell-escape -halt-on-error $< > $<.log
 	
-OBJS= bsu-thesis-dissertation-template.pdf 
+OBJS= bsu-thesis-dissertation-template.pdf  bsu-proposal.pdf
 
 all:  $(OBJS)
 
