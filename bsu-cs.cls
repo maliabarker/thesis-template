@@ -1441,14 +1441,13 @@
   \label{CommitteeApproval}
   \begin{flushleft}
     \begin{minipage}{6.50in}
-  		{\@advisorTitle}:\underline{\hspace{2in}} \hfill \makebox[2in][l]{\@advisor}\\[12pt]
-  		{\@titleA}:\underline{\hspace{2in}} \hfill \makebox[2in][l]{\@committeeA}\\[12pt]
-  		{\@titleB}:\underline{\hspace{2in}} \hfill \makebox[2in][l]{\@committeeB}\\[12pt]
-  		\if@committeeC{\@titleC}:\underline{\hspace{2in}} \hfill \makebox[2in][l]{\@committeeC}\\[12pt]\fi
-  		\if@committeeD{\@titleD}:\underline{\hspace{2in}} \hfill \makebox[2in][l]{\@committeeD}\\[12pt]\fi
-  		{\@titleGC}:\underline{\hspace{2in}} \hfill \makebox[2in][l]{\@gradCoordinator}\\[12pt]
-
-	\end{minipage}
+      {\@advisorTitle}:~\hrulefill~ \makebox[2in][l]{\@advisor}\\[12pt]
+      {\@titleA}:~\hrulefill~ \makebox[2in][l]{\@committeeA}\\[12pt]
+      {\@titleB}:~\hrulefill~ \makebox[2in][l]{\@committeeB}\\[12pt]
+      \if@committeeC{\@titleC}:~\hrulefill~ \makebox[2in][l]{\@committeeC}\\[12pt]\fi
+      \if@committeeD{\@titleD}:~\hrulefill~ \makebox[2in][l]{\@committeeD}\\[12pt]\fi
+      {\@titleGC}:~\hrulefill~ \makebox[2in][l]{\@gradCoordinator}\\[12pt]
+    \end{minipage}
   \end{flushleft}
 
   \normalspacing
