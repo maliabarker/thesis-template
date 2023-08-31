@@ -1449,7 +1449,8 @@
       {\@titleGC}:~\hrulefill~ \makebox[2in][l]{\@gradCoordinator}\\[12pt]
     \end{minipage}
   \end{flushleft}
-
+  \vfill{}
+  \newpage{}
   \normalspacing
 }
 
