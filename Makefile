@@ -8,7 +8,7 @@ all: $(OBJS)
 
 .PHONY: clean
 clean:
-	-rm *.fls \
+	-rm -f *.fls \
 		*.fdb_latexmk \
 		*.log \
 		*.aux \
