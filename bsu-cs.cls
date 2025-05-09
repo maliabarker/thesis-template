@@ -1073,6 +1073,8 @@
   \def\ps@myheadings{\let\@mkboth\@gobbletwo
   \def\@oddhead{\hbox{} \hfil\rmfamily\thepage}
   \def\@oddfoot{}
+  \def\@evenhead{\rmfamily\thepage \hfil\hbox{}}
+  \def\@evenfoot{}
   \def\chaptermark##1{}
   \def\sectionmark##1{}%
   \def\subsectionmark##1{}}
