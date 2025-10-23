@@ -248,8 +248,8 @@ Least-to-Most (LtM) prompting decomposes the original question into a sequence o
 \begin{figure}
     \centering
     \includegraphics[width=0.8\linewidth]{figures/got1.pdf}
-    \caption{From \citet{Besta_2024}, comparison of prompting structures for CoT, CoT-SC, ToT, and GoT reasoning frameworks.}
-    \label{fig:placeholder}
+    \caption{From \citet{Besta_2024}, comparison of prompting structures for ToT and GoT reasoning frameworks.}
+    \label{fig:got1}
 \end{figure}
 
 Tree-of-Thought (ToT) and Graph-of-Thought (GoT) frameworks build upon this idea by enabling complex exploration of the reasoning space through branching and backtracking, as illustrated in Figure \ref{fig:got1}. Instead of following a single linear chain of reasoning, these methods allow the model to generate and evaluate multiple reasoning paths simultaneously, applying explicit search algorithms to guide decision-making. This parallels ``dual-process'' theories of human cognition: System~1, which is fast, intuitive, and automatic, resembles the behavior of standard LLMs, while System~2, which is slow, deliberate, and reflective, aligns with the structured reasoning these methods seek to emulate. By enforcing a more deliberate reasoning process, ToT and GoT encourage the model to plan, reflect, and self-evaluate before committing to an answer—introducing a form of metacognitive control absent in earlier approaches. 
@@ -259,20 +259,6 @@ This increased structure translates into improved performance and generality acr
 Collectively, these methods introduce increased structure and systematic exploration into the reasoning process, constraining the search over thoughts while preserving the interpretability of text-based outputs. However, they still lack the verifiable structure required to ground reasoning and minimize hallucinations. While GoT achieves better computational efficiency than its predecessors, exploring the thought space remains far more expensive than standard single-pass LLM inference. In addition, these methods lack standardization, making reasoning traces difficult to reuse or repurpose—particularly when they are costly to produce. Ultimately, while ToT and GoT bring reasoning closer to structured search, they still operate in the space of natural-language thought, not in \textit{procedure space}, where reasoning could be expressed in formally structured, executable, and machine-verifiable forms.
 
 The next progression in this trajectory moves from structured natural-language reasoning to reasoning that is programmatic and executable, where steps can be verified through external computation rather than linguistic coherence.
-
-\begin{enumerate}
-    \item Least-to-Most \citep{zhou2023leasttomostpromptingenablescomplex} — linear decomposition, smaller subproblems.
-
-    \item Tree-of-Thought \citep{yao2023treethoughtsdeliberateproblem} — branching reasoning with search algorithms, explicit search over reasoning paths.
-
-    \item Graph-of-Thought \citep{Besta_2024} — generalized, flexible graph structures, compositional reasoning, and dynamic dependencies.
-
-    \item Comparative analysis: how these methods explore thought space systematically. All try to constrain reasoning, but outputs remain text-based.
-
-    \item Limitations: structure without semantics; steps not executable or verifiable, computational cost, lack of standardization, hard to repurpose traces.
-
-    % \item Later linkage: you’ll position your work as a shift from “thought-structure” to “procedure-structure.”
-\end{enumerate}
 % 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -281,7 +267,11 @@ The next progression in this trajectory moves from structured natural-language r
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 
 \section{Programmatic and Executable Reasoning}\label{sec:programmatic}
-% 1.5 - 2 pages
+% 
+To reduce hallucinations and therefore improve final outputs of generated reasoning traces, \citet{gao2023palprogramaidedlanguagemodels} and \citet{chen2023programthoughtspromptingdisentangling} introduce a synergistic approach between decomposition and programmatic execution of steps, specifically for mathematical benchmarks where LLMs do not handle arithmetic operations, mathematical expressions, and iterative problems well in natural language space. \citet{gao2023palprogramaidedlanguagemodels} use their approach, which they term Program-Aided Language Models (PAL), on the GSM8K dataset\citet{chen2023programthoughtspromptingdisentangling} use their approach, which they term Program of Thoughts (PoT), with both few-shot and zero-shot prompting strategies, showing increased performance for both prompting methods. Specifically, increased performance with zero-shot prompting shows increased generalizability to unseen numerical tasks. 
+
+However, there is still a lack of grounding in PoT and PAL output generation, where the LLM fails to assign correct values to variables based on information from the initial question. In fact, grounding errors like these affect all prompting methods, exhibiting a further need to ground the models to reduce hallucinations. Furthermore, code generation and execution limits the domain for which these methods can be used. For example, semantic reasoning would not benefit from a code and language synergistic approach, as code would not benefit any reasoning approach for more natural language questions. 
+
 \begin{enumerate}
     \item PAL \citep{gao2023palprogramaidedlanguagemodels} (LLM generates code, external executor solves) and Program of Thoughts \citep{chen2023programthoughtspromptingdisentangling} (hybrids of code + natural language steps): LMs generating code to perform reasoning.
 
@@ -298,7 +288,7 @@ The next progression in this trajectory moves from structured natural-language r
     % \item Later linkage: precursor to your “search in procedure space” idea.
 \end{enumerate}
 
-EA sentence: A related direction involves search and optimization over generated programs or solutions. Systems such as LLaMEA \citep{zhou2024llamea} and FunSearch \citep{rombach2024funsearch} pair LLMs with evolutionary or search-based evaluators that optimize generated code for correctness or performance. These frameworks demonstrate how programmatic reasoning can be evolved and verified through iterative feedback, bridging the gap between textual reasoning and executable evaluation.
+A related direction involves search and optimization over generated programs or solutions. Systems such as LLaMEA \citep{zhou2024llamea} and FunSearch \citep{rombach2024funsearch} pair LLMs with evolutionary or search-based evaluators that optimize generated code for correctness or performance. These frameworks demonstrate how programmatic reasoning can be evolved and verified through iterative feedback, bridging the gap between textual reasoning and executable evaluation.
 % 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
