@@ -158,6 +158,8 @@ This work is supported by the <> grant?
   \item[LtM] Least to Most
   \item[ToT] Tree of Thoughts
   \item[GoT] Graph of Thoughts
+  \item[PAL] Program-Aided Language Models
+  \item[PoT] Program of Thoughts
 \end{listAbbreviations}
 % 
 % The (optional) list of symbols goes here
@@ -221,8 +223,7 @@ Language models generate sequences of tokens, where each token may correspond to
 
 Following this discovery, \citet{wang2023selfconsistencyimproveschainthought} introduced \textit{Self-Consistency}, a simple but powerful extension in which multiple reasoning paths are sampled, and the final answer is chosen by majority vote among consistent outputs. The key idea is to increase diversity among reasoning chains by sampling from the model at a higher \textit{temperature}—a parameter that controls randomness during generation. Higher temperatures cause the model to explore a wider range of plausible reasoning trajectories instead of repeating similar outputs each time. This diversity allows the method to identify reasoning paths that converge on the same final answer while filtering out inconsistent or implausible ones. The intuition parallels human reasoning: the path that most frequently leads to the same conclusion is likely to be correct, whereas erroneous reasoning chains are unlikely to recur. This self-ensemble approach further improves robustness and accuracy relative to single-pass CoT prompting, yielding an average accuracy gain of roughly 18\% on the GSM8K dataset compared to CoT alone.
 
-CoT marks a major shift in how reasoning is elicited from LLMs—transforming them from opaque black boxes into systems that externalize intermediate steps in a human-verifiable form. However, these reasoning traces remain purely linguistic: their correctness can be judged by humans but not easily verified by machines. Few-shot exemplars also require manual curation or generation, which limits scalability and introduces bias toward the chosen examples. Zero-shot CoT methods, such as the “Let’s think step by step” approach proposed by \citet{kojima2023largelanguagemodelszeroshot}, partially mitigate this issue by removing the need for curated demonstrations. Yet even without exemplars, the resulting reasoning remains expressed entirely in natural language, making it difficult to verify or standardize automatically.
-% TODO: Include a citation on that paper that shows that these prompting strategies are sensitive to exemplar choices?
+CoT marks a major shift in how reasoning is elicited from LLMs—transforming them from opaque black boxes into systems that externalize intermediate steps in a human-verifiable form. However, these reasoning traces remain purely linguistic: their correctness can be judged by humans but not easily verified by machines. Few-shot exemplars also require manual curation or generation, which limits scalability and introduces bias toward the chosen examples \citep{zhao2021calibrateuseimprovingfewshot}. Zero-shot CoT methods, such as the “Let’s think step by step” approach proposed by \citet{kojima2023largelanguagemodelszeroshot}, partially mitigate this issue by removing the need for curated demonstrations. Yet even without exemplars, the resulting reasoning remains expressed entirely in natural language, making it difficult to verify or standardize automatically.
 
 Moreover, both CoT and Self-Consistency primarily demonstrate success on structured mathematical or symbolic benchmarks, where intermediate reasoning steps map cleanly onto ground-truth solutions. These tasks are well-suited to CoT because they inherently require multi-step reasoning and offer clear verification targets. By contrast, open-ended natural language reasoning—such as question answering or dialogue—poses additional challenges, as intermediate steps are less formally constrained and harder to evaluate automatically. Compounding this issue, reasoning chains expressed in natural language remain vulnerable to hallucinations, inconsistencies, and arithmetic errors, with no built-in mechanism for self-correction. As a result, while CoT and Self-Consistency establish a strong baseline for explicit reasoning and interpretability, their limitations highlight the need for more structured and verifiable reasoning frameworks—motivating the structured decomposition and search methods discussed next.
 % 
@@ -267,7 +268,7 @@ The next progression in this trajectory moves from structured natural-language r
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 
 \section{Programmatic and Executable Reasoning}\label{sec:programmatic}
-% 
+%
 \begin{figure}
     \centering
     \includegraphics[width=0.8\linewidth]{figures/pal1.png}
@@ -279,13 +280,15 @@ To reduce hallucinations and improve the reliability of reasoning traces, \citet
 
 \citet{gao2023palprogramaidedlanguagemodels} introduce \textit{Program-Aided Language Models} (PAL), which pair each chain-of-thought reasoning step with an executable code segment, as illustrated in Figure~\ref{fig:pal1}. Each reasoning step is expressed in natural language but immediately grounded by external code execution, enabling verifiable outcomes at each stage. This hybrid approach yields substantial improvements on quantitative benchmarks, achieving a 72\% solve rate on GSM8K—surpassing the best CoT-based method by approximately 10 percentage points.
 
-\citet{chen2023programthoughtspromptingdisentangling} propose \textit{Program of Thoughts} (PoT), which extends to both few-shot and zero-shot prompting scenarios. PoT demonstrates consistent gains across settings, including roughly a 6\% improvement over PAL, and highlights that zero-shot prompting retains strong performance—suggesting improved generalization to unseen numerical tasks. Both PAL and PoT demonstrate that reasoning can be expressed as explicit, verifiable procedures rather than purely linguistic traces, introducing a new dimension of machine-checkable reasoning.
+\citet{chen2023programthoughtspromptingdisentangling} propose \textit{Program of Thoughts} (PoT), which extends to both few-shot and zero-shot prompting scenarios. PoT achieves roughly a 6\% improvement over PAL and maintains strong zero-shot performance, suggesting improved generalization to unseen numerical tasks. Together, PAL and PoT demonstrate that reasoning can be expressed as explicit, verifiable procedures rather than purely linguistic traces—introducing a new dimension of machine-checkable reasoning.
 
-A related direction explores optimization over generated programs or reasoning artifacts. Systems such as LLaMEA \citep{zhou2024llamea} and FunSearch \citep{rombach2024funsearch} pair LLMs with evolutionary or search-based evaluators that iteratively refine generated code for correctness or efficiency. These frameworks illustrate how programmatic reasoning can be evolved and validated through feedback loops, bridging the gap between textual reasoning and executable verification.
+This synergy between reasoning and execution naturally motivates the idea of \emph{iterative optimization} over generated artifacts. Systems such as LLaMEA \citep{vanstein2025llamealargelanguagemodel} and FunSearch \citep{funsearch} extend programmatic reasoning by coupling LLMs with search-based evaluators that iteratively refine generated code for correctness or efficiency. LLaMEA applies evolutionary operators—mutation, crossover, and selection—to evolve candidate programs under an external scoring function, while FunSearch conducts a guided exploration of function space through repeated LLM–evaluator loops. In both frameworks, execution-based feedback provides an explicit and verifiable signal to guide the search, moving beyond linguistic plausibility toward measurable competence.
 
-Despite these advances, PAL and PoT still exhibit grounding errors, where models misassign variable values or misinterpret problem context—issues that propagate through execution and undermine reliability. Grounding failures of this kind are symptomatic of a broader limitation across prompting methods: reasoning remains tethered to linguistic interpretation, with no formal representation ensuring semantic alignment between text and execution. Moreover, these code-generation frameworks are confined to domains that can be formalized algorithmically. Semantic or open-ended natural language reasoning, such as causal inference or commonsense understanding, cannot easily benefit from code-based validation.
+A related but distinct line of work, exemplified by EvoPrompt \citep{guo2025evopromptconnectingllmsevolutionary}, performs optimization in \emph{prompt space} rather than artifact space. Instead of refining code, these systems evolve textual instructions that steer the model’s behavior across tasks or datasets. Although prompt optimization can yield significant accuracy gains, it remains confined to token-level search: the optimized prompts are not inherently interpretable, executable, or verifiable in the same way as code.
 
-Although PAL and PoT are domain-limited and susceptible to grounding errors, they mark a critical shift in reasoning research—from linguistic explanations to executable procedures. By introducing explicit programmatic reasoning, they begin to close the gap between interpretability and verifiability. The next set of approaches extends this movement further, seeking not only structured reasoning but also integrated mechanisms for validation and self-correction. 
+Across these systems, the central goal is to \emph{close the loop} between generation and evaluation: candidates are produced, scored by an external metric (execution, accuracy, or heuristics), and improved through search. Yet despite this progress, these approaches remain code- or token-based; they do not represent reasoning as \emph{structured, verifiable procedures} with standardized, reusable components. Moreover, PAL and PoT continue to suffer from grounding errors, where models misassign variable values or misinterpret problem context, revealing a lack of semantic alignment between language and execution. Programmatic reasoning also remains limited to domains that can be formalized algorithmically—tasks such as causal inference or commonsense reasoning fall outside its reach.
+
+Even with these limitations, PAL, PoT, and their optimization-based successors mark a pivotal shift in reasoning research: from linguistic explanations to executable and evolvable procedures. By integrating execution and feedback-driven refinement, they begin to close the gap between interpretability and verifiability. The next section extends this trajectory by introducing \emph{agentic reasoning}—frameworks that couple reasoning, acting, and self-reflection to achieve more adaptive, self-correcting behavior while still lacking fully standardized, machine-verifiable procedural structures.
 % 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -309,23 +312,6 @@ Although PAL and PoT are domain-limited and susceptible to grounding errors, the
     \item Limitations: reasoning traces exist but are inconsistent, no universal format (these systems still operate mostly over textual reasoning traces, not structured procedures).
 
     % \item Later linkage: your “typed reflection + validator feedback” mechanism builds directly on this lineage.
-\end{enumerate}
-% 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-% Section: Search and Optimization in Reasoning Space
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% 
-\section{Search and Optimization in Reasoning Space}\label{sec:opt}
-\begin{enumerate}
-    \item Define the difference between searching over text/thoughts (ToT, GoT) vs. searching over generated artifacts (programs, procedures).
-
-    \item Summarize LLaMEA, FunSearch, and EvoPrompt as early explorations of this.
-
-    \item Mention how these methods “close the loop” between reasoning generation and validation.
-
-    \item End with: “However, these approaches remain primarily token- or code-based, rather than operating over structured, verifiable procedures that generalize reasoning as modular, composable actions.”
 \end{enumerate}
 % 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
