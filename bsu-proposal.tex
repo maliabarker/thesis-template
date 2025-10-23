@@ -268,27 +268,24 @@ The next progression in this trajectory moves from structured natural-language r
 % 
 \section{Programmatic and Executable Reasoning}\label{sec:programmatic}
 % 
-To reduce hallucinations and therefore improve final outputs of generated reasoning traces, \citet{gao2023palprogramaidedlanguagemodels} and \citet{chen2023programthoughtspromptingdisentangling} introduce a synergistic approach between decomposition and programmatic execution of steps, specifically for mathematical benchmarks where LLMs do not handle arithmetic operations, mathematical expressions, and iterative problems well in natural language space. \citet{gao2023palprogramaidedlanguagemodels} use their approach, which they term Program-Aided Language Models (PAL), on the GSM8K dataset\citet{chen2023programthoughtspromptingdisentangling} use their approach, which they term Program of Thoughts (PoT), with both few-shot and zero-shot prompting strategies, showing increased performance for both prompting methods. Specifically, increased performance with zero-shot prompting shows increased generalizability to unseen numerical tasks. 
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\linewidth]{figures/pal1.png}
+    \caption{From \citet{gao2023palprogramaidedlanguagemodels}, an example of a PAL prompt, where CoT reasoning is highlighted in blue and programmatic steps are shown in gray with pink text. Program of Thoughts (PoT) follows a similar pattern, integrating natural language reasoning with executable code segments.}
+    \label{fig:pal1}
+\end{figure}
+% 
+To reduce hallucinations and improve the reliability of reasoning traces, \citet{gao2023palprogramaidedlanguagemodels} and \citet{chen2023programthoughtspromptingdisentangling} propose a synergistic integration of natural language reasoning and programmatic execution. These approaches target mathematical benchmarks, where LLMs often struggle with arithmetic, symbolic manipulation, and iterative computation in natural-language space. 
 
-However, there is still a lack of grounding in PoT and PAL output generation, where the LLM fails to assign correct values to variables based on information from the initial question. In fact, grounding errors like these affect all prompting methods, exhibiting a further need to ground the models to reduce hallucinations. Furthermore, code generation and execution limits the domain for which these methods can be used. For example, semantic reasoning would not benefit from a code and language synergistic approach, as code would not benefit any reasoning approach for more natural language questions. 
+\citet{gao2023palprogramaidedlanguagemodels} introduce \textit{Program-Aided Language Models} (PAL), which pair each chain-of-thought reasoning step with an executable code segment, as illustrated in Figure~\ref{fig:pal1}. Each reasoning step is expressed in natural language but immediately grounded by external code execution, enabling verifiable outcomes at each stage. This hybrid approach yields substantial improvements on quantitative benchmarks, achieving a 72\% solve rate on GSM8K—surpassing the best CoT-based method by approximately 10 percentage points.
 
-\begin{enumerate}
-    \item PAL \citep{gao2023palprogramaidedlanguagemodels} (LLM generates code, external executor solves) and Program of Thoughts \citep{chen2023programthoughtspromptingdisentangling} (hybrids of code + natural language steps): LMs generating code to perform reasoning.
+\citet{chen2023programthoughtspromptingdisentangling} propose \textit{Program of Thoughts} (PoT), which extends to both few-shot and zero-shot prompting scenarios. PoT demonstrates consistent gains across settings, including roughly a 6\% improvement over PAL, and highlights that zero-shot prompting retains strong performance—suggesting improved generalization to unseen numerical tasks. Both PAL and PoT demonstrate that reasoning can be expressed as explicit, verifiable procedures rather than purely linguistic traces, introducing a new dimension of machine-checkable reasoning.
 
-    \item Discuss how this introduces verifiability through execution — but at the cost of brittleness and modality-switching.
+A related direction explores optimization over generated programs or reasoning artifacts. Systems such as LLaMEA \citep{zhou2024llamea} and FunSearch \citep{rombach2024funsearch} pair LLMs with evolutionary or search-based evaluators that iteratively refine generated code for correctness or efficiency. These frameworks illustrate how programmatic reasoning can be evolved and validated through feedback loops, bridging the gap between textual reasoning and executable verification.
 
-    \item Contrast symbolic execution with natural-language decomposition.
+Despite these advances, PAL and PoT still exhibit grounding errors, where models misassign variable values or misinterpret problem context—issues that propagate through execution and undermine reliability. Grounding failures of this kind are symptomatic of a broader limitation across prompting methods: reasoning remains tethered to linguistic interpretation, with no formal representation ensuring semantic alignment between text and execution. Moreover, these code-generation frameworks are confined to domains that can be formalized algorithmically. Semantic or open-ended natural language reasoning, such as causal inference or commonsense understanding, cannot easily benefit from code-based validation.
 
-    \item Highlight the beginning of reasoning as explicit programs/procedures.
-
-    \item Strengths: precise, verifiable execution for math/logical tasks.
-
-    \item Limitations: narrow domain (requires formalizable problems), not directly generalizable to abstract reasoning.
-
-    % \item Later linkage: precursor to your “search in procedure space” idea.
-\end{enumerate}
-
-A related direction involves search and optimization over generated programs or solutions. Systems such as LLaMEA \citep{zhou2024llamea} and FunSearch \citep{rombach2024funsearch} pair LLMs with evolutionary or search-based evaluators that optimize generated code for correctness or performance. These frameworks demonstrate how programmatic reasoning can be evolved and verified through iterative feedback, bridging the gap between textual reasoning and executable evaluation.
+Although PAL and PoT are domain-limited and susceptible to grounding errors, they mark a critical shift in reasoning research—from linguistic explanations to executable procedures. By introducing explicit programmatic reasoning, they begin to close the gap between interpretability and verifiability. The next set of approaches extends this movement further, seeking not only structured reasoning but also integrated mechanisms for validation and self-correction. 
 % 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
