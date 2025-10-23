@@ -152,6 +152,7 @@ This work is supported by the <> grant?
 % The (optional) list of abbreviations goes here
 \begin{listAbbreviations}
   \item[LLM] Large Language Model
+  \item[NLP] Natural Language Processing
   \item[CoT] Chain of Thought
   \item[LtM] Least to Most
   \item[ToT] Tree of Thoughts
@@ -234,7 +235,27 @@ Moreover, both CoT and Self-Consistency primarily demonstrate success on structu
 % 
 The evolution from Chain-of-Thought to more structured reasoning reflects a shift from eliciting reasoning to organizing it. While CoT and Self-Consistency make reasoning explicit, they do so only at the level of language: steps are sequential but unstructured, and no mechanisms exist to plan or evaluate intermediate results. To address these challenges, recent approaches such as Least-to-Most (LtM) \citep{zhou2023leasttomostpromptingenablescomplex}, Tree-of-Thought (ToT) \citep{yao2023treethoughtsdeliberateproblem}, and Graph-of-Thought (GoT) \citep{Besta_2024} introduce explicit structure into the reasoning process by decomposing tasks into smaller subproblems or systematically searching over alternative reasoning paths. These methods extend the interpretability of CoT while aiming for more consistent, compositional, and verifiable reasoning.
 
-LtM prompting decomposes 
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\linewidth]{figures/ltm1.pdf}
+    \caption{From \citet{zhou2023leasttomostpromptingenablescomplex}, an example of the sub-problem decomposition approach taken by Least-to-Most prompting for a math word problem.}
+    \label{fig:ltm1}
+\end{figure}
+
+LtM prompting decomposes the original question into a list of subproblems to solve linearly, whereby solving a given subproblem is facilitated by answers to previously solved subproblems. In tackling the questions bu decomposition, LtM allows the LLM to generalize better, enabling the LLM to overcome easy-to-hard generalization in which the test problems are harder to solve than the example problems. While overall improvements are minimal when compared to CoT prompting, harder questions such as GSM8K questions that decompose into 5 or more steps show a <>\% improvement, showcasing the generalizability that LtM provides over CoT. However, this does not mean that it improves generalizability overall, as the decomposition prompts do not generalize well across domains and can even have difficulty generalizing within the same domain, possibly explaining why there is not such a large increase on the GSM8K dataset as there was on other datasets. Furthermore, generated thoughts still exist in a text-token space, making it hard to verify and search over the reasoning space.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{}
+    \caption{Caption}
+    \label{fig:placeholder}
+\end{figure}
+
+Tree of thoughts and graph of thoughts both aim to tackle complex searches in the thought token space, allowing exploration over different reasoning chains with lookahead and backtracking. In human cognitition, "dual process" models exhibit two levels of thinking: system 1, which includes fast, automatic, and unconscious thinking, can best describe how most LLMs reach their conclusions while system 2, which includes slow, deliberate, and conscious thinking, contributes to planning and tracking. The goal in adding more structure through ToT and GoT is to enforce a system 2 level of thinking in the LLM, forcing it to make deliberate decisions in its reasoning process by considering multiple different reasoning paths and self-evaluating choices to decide the next course of action. This also contributes to increased generality, allowing for improvements on NLP tasks such as creative writing and solving crosswords, with the latter benchmark exhibiting a 60\% word-level success rate while CoT exhibits a mere 16\% word-level success rate.
+
+GoT further improves on this while also reducing costs by greater than 31\% \citep{Besta_2024}. Furthermore, GoT better utilizes self-reflection, allowing the LLM to loop over a thought if refinement is deemed necessary.
+
+These methods show increased structure in reasoning and generalizability by exploring the thought space systematically, constraining reasoning while still allowing outputs to be text-based and therefore easily interpretable. However, they still lack the verifiable structure needed to ground the LLM's reasoning and reduce hallucinations. While GoT reduces computational costs compared to previous methods, it is still computationally expensive to explore the thought space when compared to simple input-output LLM execution. Furthermore, these methods lack standardization, making it hard to repurpose thought traces which may have been costly to create and recreate when they are needed again. These methods operate in thought space—searching over natural-language reasoning traces—but do not explore procedure space, where reasoning is represented in structured, executable forms.
 
 \begin{enumerate}
     \item Least-to-Most \citep{zhou2023leasttomostpromptingenablescomplex} — linear decomposition, smaller subproblems.
@@ -249,8 +270,6 @@ LtM prompting decomposes
 
     % \item Later linkage: you’ll position your work as a shift from “thought-structure” to “procedure-structure.”
 \end{enumerate}
-
-Transition sentence: These methods operate in thought space—searching over natural-language reasoning traces—but do not explore procedure space, where reasoning is represented in structured, executable forms.
 % 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
