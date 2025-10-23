@@ -198,39 +198,42 @@ In-context learning/few-shot learning takes place at inference time, meaning no 
 \end{enumerate}
 % 
 \chapter{Relevant Works}\label{ch:works}
-% 
-% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % Section: Token-Based Reasoning: CoT & Extensions
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% 
 \section{Token-Based Reasoning: The Chain-of-Thought Paradigm}\label{sec:CoT}
 \begin{figure}
     \centering
-    \includegraphics[width=0.5\linewidth]{}
-    \caption{Caption}
-    \label{fig:placeholder}
+    \includegraphics[width=0.8\linewidth]{figures/cot1.pdf}
+    \caption{From \citet{DBLP:journals/corr/abs-2201-11903}: comparison of a standard few-shot prompt versus a chain-of-thought (CoT) few-shot prompt.}
+    \label{fig:cot1}
 \end{figure}
-% 2-3 pages
-Language models are able to produce chains of text, where each "thought" or response string is considered a token. Following the discovery of performance gains with simple few-shot prompting strategies as introduced by \citet{DBLP:journals/corr/abs-2005-14165}, \citet{DBLP:journals/corr/abs-2201-11903} combined few-shot prompting with enforced step-by-step reasoning. This enforced step-by-step reasoning is called Chain of Thought, examples of these types of prompts are included in Figure \ref{fig:}. 
 
-\begin{enumerate}
-    \item Introduce Chain-of-Thought \citep{DBLP:journals/corr/abs-2201-11903} (major performance gains by eliciting intermediate steps) and Self-Consistency \citep{wang2023selfconsistencyimproveschainthought} (improves robustness via sampling and voting).
+Language models generate sequences of tokens, where each token may correspond to a fragment of reasoning or a “thought.” Early prompting strategies, such as those introduced by \citet{DBLP:journals/corr/abs-2005-14165}, demonstrated that few-shot examples alone could substantially improve task performance. Building on this insight, \citet{DBLP:journals/corr/abs-2201-11903} proposed \textit{Chain-of-Thought} (CoT) prompting, which explicitly encourages models to reason step by step. As shown in Figure~\ref{fig:cot1}, including a single example of intermediate reasoning in the prompt yields large performance gains across arithmetic, symbolic, and commonsense reasoning tasks by eliciting structured intermediate steps in the model’s output. Across datasets such as GSM8K and MultiArith, CoT prompting improved accuracy by over 40\% compared to standard few-shot baselines when applied to large models such as GPT-3 (175B) and PaLM (540B).
 
+Following this discovery, \citet{wang2023selfconsistencyimproveschainthought} introduced \textit{Self-Consistency}, a simple but powerful extension in which multiple reasoning paths are sampled, and the final answer is chosen by majority vote among consistent outputs. The key idea is to increase diversity among reasoning chains by sampling from the model at a higher \textit{temperature}—a parameter that controls randomness during generation. Higher temperatures cause the model to explore a wider range of plausible reasoning trajectories instead of repeating similar outputs each time. This diversity allows the method to identify reasoning paths that converge on the same final answer while filtering out inconsistent or implausible ones. The intuition parallels human reasoning: the path that most frequently leads to the same conclusion is likely to be correct, whereas erroneous reasoning chains are unlikely to recur. This self-ensemble approach further improves robustness and accuracy relative to single-pass CoT prompting, yielding an average accuracy gain of roughly 18\% on the GSM8K dataset compared to CoT alone.
+
+CoT marks a major shift in how reasoning is elicited from LLMs—transforming them from opaque black boxes into systems that externalize intermediate steps in a human-verifiable form. However, these reasoning traces remain purely linguistic: their correctness can be judged by humans but not easily verified by machines. Few-shot exemplars also require manual curation or generation, which limits scalability and introduces bias toward the chosen examples. Zero-shot CoT methods, such as the “Let’s think step by step” approach proposed by \citet{kojima2023largelanguagemodelszeroshot}, partially mitigate this issue by removing the need for curated demonstrations. Yet even without exemplars, the resulting reasoning remains expressed entirely in natural language, making it difficult to verify or standardize automatically.
+
+% TODO: Include a citation on that paper that shows that these prompting strategies are sensitive to exemplar choices?
+
+Moreover, both CoT and Self-Consistency primarily demonstrate success on structured mathematical or symbolic benchmarks, where intermediate reasoning steps map cleanly onto ground-truth solutions. These tasks are well-suited to CoT because they inherently require multi-step reasoning and offer clear verification targets. By contrast, open-ended natural language reasoning—such as question answering or dialogue—poses additional challenges, as intermediate steps are less formally constrained and harder to evaluate automatically. Compounding this issue, reasoning chains expressed in natural language remain vulnerable to hallucinations, inconsistencies, and arithmetic errors, with no built-in mechanism for self-correction. As a result, while CoT and Self-Consistency establish a strong baseline for explicit reasoning and interpretability, their limitations highlight the need for more structured and verifiable reasoning frameworks—motivating the structured decomposition and search methods discussed next.
+
+% \begin{enumerate}
+%     \item Introduce Chain-of-Thought \citep{DBLP:journals/corr/abs-2201-11903} (major performance gains by eliciting intermediate steps) and Self-Consistency \citep{wang2023selfconsistencyimproveschainthought} (improves robustness via sampling and voting).
+
+%     \item Discuss the emergence of intermediate reasoning steps, and why it works.
+
+%     \item Strengths: simple, generalizable across domains.
+
+%     \item Limitations: linguistic reasoning only, unverified steps, brittle scaling, hallucination.
+
+%     \item Evaluation: strong baseline but fragile — sets stage for more structured methods.
     
-
-    \item Discuss the emergence of intermediate reasoning steps, and why it works.
-
-    \item Strengths: simple, generalizable across domains.
-
-    \item Limitations: linguistic reasoning only, unverified steps, brittle scaling, hallucination.
-
-    \item Evaluation: strong baseline but fragile — sets stage for more structured methods.
-    
-    % \item Later linkage: this section is your baseline — “token-space search.”
-\end{enumerate}
+%     % \item Later linkage: this section is your baseline — “token-space search.”
+% \end{enumerate}
 % 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
